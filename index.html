@@ -91,21 +91,21 @@
     .nav-right {
       display: flex;
       align-items: center;
-      gap: 18px;
+      gap: 16px;
       flex-wrap: wrap;
       justify-content: flex-end;
     }
 
     nav {
       display: flex;
-      gap: 18px;
+      gap: 16px;
       flex-wrap: wrap;
       justify-content: flex-end;
     }
 
     nav a {
       color: var(--navy);
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       font-weight: 800;
     }
 
@@ -133,6 +133,31 @@
     .language-switch button.active {
       background: var(--navy);
       color: var(--white);
+    }
+
+    .github-link {
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--navy);
+      border: 1px solid var(--border);
+      background: var(--white);
+      transition: 0.2s ease;
+    }
+
+    .github-link:hover {
+      color: var(--white);
+      background: var(--navy);
+      transform: translateY(-1px);
+    }
+
+    .github-link svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
     }
 
     .hero {
@@ -315,14 +340,16 @@
       font-weight: 900;
     }
 
-    .member {
+    .member,
+    .student-card {
       display: grid;
       grid-template-columns: 140px 1fr;
       gap: 22px;
       align-items: start;
     }
 
-    .member-photo {
+    .member-photo,
+    .student-photo {
       width: 140px;
       height: 140px;
       border-radius: 28px;
@@ -333,7 +360,8 @@
       background: #f1f5f9;
     }
 
-    .member-placeholder {
+    .member-placeholder,
+    .student-placeholder {
       width: 140px;
       height: 140px;
       border-radius: 28px;
@@ -351,6 +379,12 @@
       color: var(--pink);
       font-weight: 900;
       margin-bottom: 10px;
+    }
+
+    .student-degree {
+      color: var(--blue);
+      font-weight: 900;
+      margin-bottom: 8px;
     }
 
     .publication {
@@ -442,14 +476,7 @@
       text-decoration: underline;
     }
 
-    @media (max-width: 960px) {
-      .hero-wrap,
-      .grid.cols-3,
-      .grid.cols-2,
-      .contact-box {
-        grid-template-columns: 1fr;
-      }
-
+    @media (max-width: 1080px) {
       .nav {
         align-items: flex-start;
         flex-direction: column;
@@ -462,6 +489,15 @@
       nav {
         justify-content: flex-start;
       }
+    }
+
+    @media (max-width: 960px) {
+      .hero-wrap,
+      .grid.cols-3,
+      .grid.cols-2,
+      .contact-box {
+        grid-template-columns: 1fr;
+      }
 
       .hero {
         padding-top: 42px;
@@ -473,12 +509,15 @@
     }
 
     @media (max-width: 560px) {
-      .member {
+      .member,
+      .student-card {
         grid-template-columns: 1fr;
       }
 
       .member-photo,
-      .member-placeholder {
+      .member-placeholder,
+      .student-photo,
+      .student-placeholder {
         width: 120px;
         height: 120px;
         border-radius: 24px;
@@ -521,6 +560,7 @@
           <a href="#about" data-i18n="nav_about">Acerca de</a>
           <a href="#research" data-i18n="nav_research">Investigación</a>
           <a href="#members" data-i18n="nav_members">Miembros</a>
+          <a href="#students" data-i18n="nav_students">Estudiantes</a>
           <a href="#publications" data-i18n="nav_publications">Publicaciones</a>
           <a href="#scripts" data-i18n="nav_scripts">Recursos</a>
           <a href="#contact" data-i18n="nav_contact">Contacto</a>
@@ -530,6 +570,12 @@
           <button id="btn-es" class="active" type="button" onclick="setLanguage('es')">ES</button>
           <button id="btn-en" type="button" onclick="setLanguage('en')">EN</button>
         </div>
+
+        <a class="github-link" href="https://github.com/uiounam" target="_blank" rel="noopener" aria-label="GitHub UIO UNAM">
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M8 0C3.58 0 0 3.64 0 8.13c0 3.59 2.29 6.63 5.47 7.71.4.08.55-.18.55-.39 0-.19-.01-.84-.01-1.52-2.01.38-2.53-.5-2.69-.96-.09-.23-.48-.96-.82-1.15-.28-.15-.68-.52-.01-.53.63-.01 1.08.59 1.23.83.72 1.23 1.87.88 2.33.67.07-.53.28-.88.51-1.08-1.78-.21-3.64-.9-3.64-4.01 0-.89.31-1.61.82-2.18-.08-.2-.36-1.03.08-2.15 0 0 .67-.22 2.2.83A7.48 7.48 0 0 1 8 3.89c.68 0 1.36.09 2 .27 1.53-1.05 2.2-.83 2.2-.83.44 1.12.16 1.95.08 2.15.51.57.82 1.29.82 2.18 0 3.12-1.87 3.8-3.65 4.01.29.25.54.74.54 1.5 0 1.08-.01 1.95-.01 2.22 0 .21.15.47.55.39A8.03 8.03 0 0 0 16 8.13C16 3.64 12.42 0 8 0Z"/>
+          </svg>
+        </a>
       </div>
     </div>
   </header>
@@ -553,7 +599,6 @@
 
         <div class="buttons">
           <a class="btn primary" href="#research" data-i18n="hero_btn_research">Explorar líneas de investigación</a>
-          <a class="btn secondary" href="https://github.com/uiounam" target="_blank" rel="noopener" data-i18n="hero_btn_github">Organización en GitHub</a>
         </div>
       </div>
     </div>
@@ -668,7 +713,7 @@
     <section id="members">
       <div class="container">
         <div class="section-kicker" data-i18n="members_kicker">Miembros</div>
-        <h2 class="section-title" data-i18n="members_title">Integrantes del laboratorio</h2>
+        <h2 class="section-title" data-i18n="members_title">Equipo académico</h2>
         <p class="section-intro" data-i18n="members_intro">
           El laboratorio reúne experiencia en investigación en obesidad, genómica, metabolómica, bioinformática
           y ciencia biomédica traslacional.
@@ -714,18 +759,6 @@
           </div>
 
           <div class="card member">
-            <div class="member-placeholder">+</div>
-            <div>
-              <h3 data-i18n="students_title">Estudiantes y personas en formación</h3>
-              <div class="role" data-i18n="students_role">Licenciatura, maestría, doctorado y estancias académicas</div>
-              <p data-i18n="students_description">
-                Esta sección incluirá estudiantes, proyectos de tesis, investigadores visitantes y personas en formación
-                que contribuyan a proyectos de genómica y metabolómica del laboratorio.
-              </p>
-            </div>
-          </div>
-
-          <div class="card member">
             <div class="member-placeholder">∞</div>
             <div>
               <h3 data-i18n="collaborators_title">Colaboradores</h3>
@@ -740,7 +773,76 @@
       </div>
     </section>
 
-    <section class="light" id="publications">
+    <section class="light" id="students">
+      <div class="container">
+        <div class="section-kicker" data-i18n="students_kicker">Estudiantes</div>
+        <h2 class="section-title" data-i18n="students_title">Estudiantes y personas en formación</h2>
+        <p class="section-intro" data-i18n="students_intro">
+          Esta sección integrará estudiantes de licenciatura, maestría, doctorado, servicio social, estancias académicas
+          y tesis vinculadas con los proyectos de genómica y metabolómica del laboratorio.
+        </p>
+
+        <div class="grid cols-2">
+
+          <div class="card student-card">
+            <div class="student-placeholder">+</div>
+            <div>
+              <h3 data-i18n="student_placeholder_name">Nombre del estudiante</h3>
+              <div class="student-degree" data-i18n="student_placeholder_degree">Grado académico / Programa</div>
+              <p data-i18n="student_placeholder_text">
+                Breve descripción del proyecto, tema de tesis o línea de investigación en la que participa.
+              </p>
+              <div class="tag-row">
+                <span class="tag">genómica</span>
+                <span class="tag">metabolómica</span>
+                <span class="tag">tesis</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card student-card">
+            <div class="student-placeholder">+</div>
+            <div>
+              <h3 data-i18n="student_placeholder_name_2">Nombre del estudiante</h3>
+              <div class="student-degree" data-i18n="student_placeholder_degree_2">Grado académico / Programa</div>
+              <p data-i18n="student_placeholder_text_2">
+                Breve descripción del proyecto, tema de tesis o línea de investigación en la que participa.
+              </p>
+              <div class="tag-row">
+                <span class="tag">bioinformática</span>
+                <span class="tag">obesidad</span>
+                <span class="tag">metabolismo</span>
+              </div>
+            </div>
+          </div>
+
+          <!--
+          PARA AGREGAR UN ESTUDIANTE CON FOTO:
+          1. Sube la imagen a: assets/students/nombre-apellido.jpg
+          2. Copia este bloque dentro del grid de estudiantes.
+
+          <div class="card student-card">
+            <img class="student-photo" src="assets/students/nombre-apellido.jpg" alt="Nombre del estudiante">
+            <div>
+              <h3>Nombre del estudiante</h3>
+              <div class="student-degree">Licenciatura en ... / Maestría en ... / Doctorado en ...</div>
+              <p>
+                Descripción breve del proyecto, tesis o línea de investigación.
+              </p>
+              <div class="tag-row">
+                <span class="tag">genómica</span>
+                <span class="tag">metabolómica</span>
+                <span class="tag">tesis</span>
+              </div>
+            </div>
+          </div>
+          -->
+
+        </div>
+      </div>
+    </section>
+
+    <section id="publications">
       <div class="container">
         <div class="section-kicker" data-i18n="publications_kicker">Publicaciones</div>
         <h2 class="section-title" data-i18n="publications_title">Publicaciones seleccionadas</h2>
@@ -775,12 +877,11 @@
 
         <div class="buttons">
           <a class="btn primary" href="https://scholar.google.com/citations?user=ctMDw4IAAAAJ&hl=en" target="_blank" rel="noopener" data-i18n="publications_btn_scholar">Ver Google Scholar</a>
-          <a class="btn secondary" href="https://github.com/uiounam" target="_blank" rel="noopener" data-i18n="publications_btn_github">Ver GitHub</a>
         </div>
       </div>
     </section>
 
-    <section id="scripts">
+    <section class="light" id="scripts">
       <div class="container">
         <div class="section-kicker" data-i18n="scripts_kicker">Recursos computacionales</div>
         <h2 class="section-title" data-i18n="scripts_title">Recursos de genómica y metabolómica</h2>
@@ -824,40 +925,6 @@
       </div>
     </section>
 
-    <section class="light" id="principles">
-      <div class="container">
-        <div class="section-kicker" data-i18n="principles_kicker">Principios de investigación</div>
-        <h2 class="section-title" data-i18n="principles_title">Ciencia de datos biomédica responsable y reproducible</h2>
-        <p class="section-intro" data-i18n="principles_intro">
-          Promovemos flujos de trabajo computacionales transparentes, manteniendo la protección de datos clínicos
-          y humanos sensibles.
-        </p>
-
-        <div class="grid cols-3">
-          <div class="card">
-            <h3 data-i18n="principles_card1_title">Reproducibilidad</h3>
-            <p data-i18n="principles_card1_text">
-              Documentación clara, control de versiones, organización de flujos de trabajo y plantillas de análisis reutilizables.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3 data-i18n="principles_card2_title">Uso responsable de datos</h3>
-            <p data-i18n="principles_card2_text">
-              Los datos clínicos o derivados de personas no se comparten públicamente salvo que las aprobaciones correspondientes lo permitan.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3 data-i18n="principles_card3_title">Colaboración académica</h3>
-            <p data-i18n="principles_card3_text">
-              Estamos abiertos a colaboraciones académicas en genómica, metabolómica, obesidad, metabolismo y salud de precisión.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section id="contact">
       <div class="container">
         <div class="contact-box">
@@ -892,6 +959,7 @@
         nav_about: "Acerca de",
         nav_research: "Investigación",
         nav_members: "Miembros",
+        nav_students: "Estudiantes",
         nav_publications: "Publicaciones",
         nav_scripts: "Recursos",
         nav_contact: "Contacto",
@@ -900,7 +968,6 @@
         hero_subtitle: "Investigación en genómica y metabolómica aplicada a obesidad, metabolismo y salud de precisión.",
         hero_text: "Estudiamos la complejidad molecular de la obesidad y las enfermedades metabólicas mediante genómica, metabolómica, bioinformática y ciencia de datos biomédica reproducible.",
         hero_btn_research: "Explorar líneas de investigación",
-        hero_btn_github: "Organización en GitHub",
 
         about_kicker: "Acerca del laboratorio",
         about_title: "Un laboratorio académico y traslacional enfocado en obesidad y salud metabólica.",
@@ -925,24 +992,30 @@
         research_card4_text: "Integración de información molecular y clínica para apoyar el descubrimiento de biomarcadores, la estratificación de pacientes y el diseño de estrategias de intervención personalizadas.",
 
         members_kicker: "Miembros",
-        members_title: "Integrantes del laboratorio",
+        members_title: "Equipo académico",
         members_intro: "El laboratorio reúne experiencia en investigación en obesidad, genómica, metabolómica, bioinformática y ciencia biomédica traslacional.",
         ruth_role: "Líder del laboratorio / Investigadora principal",
         ruth_description: "Investigadora principal de la Unidad de Investigación en Obesidad. Su trabajo se enfoca en obesidad, enfermedad metabólica, expresión génica, genómica, metabolitos y aproximaciones clínico-traslacionales para comprender la salud metabólica.",
         juan_role: "Investigador asociado",
         juan_description: "Investigador asociado enfocado en metabolómica, bioinformática, biología de sistemas, integración de datos ómicos y desarrollo de flujos de trabajo computacionales reproducibles para investigación en obesidad y metabolismo.",
-        students_title: "Estudiantes y personas en formación",
-        students_role: "Licenciatura, maestría, doctorado y estancias académicas",
-        students_description: "Esta sección incluirá estudiantes, proyectos de tesis, investigadores visitantes y personas en formación que contribuyan a proyectos de genómica y metabolómica del laboratorio.",
         collaborators_title: "Colaboradores",
         collaborators_role: "Colaboraciones nacionales e internacionales",
         collaborators_description: "Colaboramos con grupos clínicos, experimentales y computacionales interesados en obesidad, metabolismo, genómica, metabolómica y salud de precisión.",
+
+        students_kicker: "Estudiantes",
+        students_title: "Estudiantes y personas en formación",
+        students_intro: "Esta sección integrará estudiantes de licenciatura, maestría, doctorado, servicio social, estancias académicas y tesis vinculadas con los proyectos de genómica y metabolómica del laboratorio.",
+        student_placeholder_name: "Nombre del estudiante",
+        student_placeholder_degree: "Grado académico / Programa",
+        student_placeholder_text: "Breve descripción del proyecto, tema de tesis o línea de investigación en la que participa.",
+        student_placeholder_name_2: "Nombre del estudiante",
+        student_placeholder_degree_2: "Grado académico / Programa",
+        student_placeholder_text_2: "Breve descripción del proyecto, tema de tesis o línea de investigación en la que participa.",
 
         publications_kicker: "Publicaciones",
         publications_title: "Publicaciones seleccionadas",
         publications_intro: "Publicaciones representativas del laboratorio y sus integrantes. Esta sección será actualizada con manuscritos, conjuntos de datos, recursos computacionales y repositorios de código conforme estén disponibles.",
         publications_btn_scholar: "Ver Google Scholar",
-        publications_btn_github: "Ver GitHub",
 
         scripts_kicker: "Recursos computacionales",
         scripts_title: "Recursos de genómica y metabolómica",
@@ -951,16 +1024,6 @@
         status_development_2: "En desarrollo",
         genomics_repo_text: "Flujos de trabajo para análisis de variación genética, resúmenes a nivel génico, anotación de variantes y estudios de asociación genotipo-fenotipo.",
         metabolomics_repo_text: "Flujos de trabajo para procesamiento de datos metabolómicos, normalización, análisis estadístico, exploración de biomarcadores y visualización.",
-
-        principles_kicker: "Principios de investigación",
-        principles_title: "Ciencia de datos biomédica responsable y reproducible",
-        principles_intro: "Promovemos flujos de trabajo computacionales transparentes, manteniendo la protección de datos clínicos y humanos sensibles.",
-        principles_card1_title: "Reproducibilidad",
-        principles_card1_text: "Documentación clara, control de versiones, organización de flujos de trabajo y plantillas de análisis reutilizables.",
-        principles_card2_title: "Uso responsable de datos",
-        principles_card2_text: "Los datos clínicos o derivados de personas no se comparten públicamente salvo que las aprobaciones correspondientes lo permitan.",
-        principles_card3_title: "Colaboración académica",
-        principles_card3_text: "Estamos abiertos a colaboraciones académicas en genómica, metabolómica, obesidad, metabolismo y salud de precisión.",
 
         contact_title: "Contacto y colaboración",
         contact_text: "Unidad de Investigación en Obesidad<br>Instituto Nacional de Ciencias Médicas y Nutrición Salvador Zubirán / UNAM",
@@ -972,6 +1035,7 @@
         nav_about: "About",
         nav_research: "Research",
         nav_members: "Members",
+        nav_students: "Students",
         nav_publications: "Publications",
         nav_scripts: "Resources",
         nav_contact: "Contact",
@@ -980,7 +1044,6 @@
         hero_subtitle: "Genomics and metabolomics research for obesity, metabolism and precision health.",
         hero_text: "We study the molecular complexity of obesity and metabolic diseases through genomics, metabolomics, bioinformatics and reproducible biomedical data science.",
         hero_btn_research: "Explore research areas",
-        hero_btn_github: "GitHub organization",
 
         about_kicker: "About the laboratory",
         about_title: "An academic and translational laboratory focused on obesity and metabolic health.",
@@ -1005,24 +1068,30 @@
         research_card4_text: "Integration of molecular and clinical information to support biomarker discovery, patient stratification and personalized intervention strategies.",
 
         members_kicker: "Members",
-        members_title: "Laboratory members",
+        members_title: "Academic team",
         members_intro: "The laboratory brings together expertise in obesity research, genomics, metabolomics, bioinformatics and translational biomedical science.",
         ruth_role: "Laboratory Lead / Principal Investigator",
         ruth_description: "Principal investigator of the Obesity Research Unit. Her work focuses on obesity, metabolic disease, gene expression, genomics, metabolites and clinical-translational approaches to understand metabolic health.",
         juan_role: "Associate Researcher",
         juan_description: "Associate researcher focused on metabolomics, bioinformatics, systems biology, omics data integration and the development of reproducible computational workflows for obesity and metabolism research.",
-        students_title: "Students and trainees",
-        students_role: "Undergraduate, MSc, PhD and academic visitors",
-        students_description: "This section will include students, thesis projects, visiting researchers and trainees contributing to genomics and metabolomics projects in the laboratory.",
         collaborators_title: "Collaborators",
         collaborators_role: "National and international collaborations",
         collaborators_description: "We collaborate with clinical, experimental and computational groups interested in obesity, metabolism, genomics, metabolomics and precision health.",
+
+        students_kicker: "Students",
+        students_title: "Students and trainees",
+        students_intro: "This section will include undergraduate, MSc and PhD students, social service trainees, academic visitors and thesis projects linked to the laboratory's genomics and metabolomics research.",
+        student_placeholder_name: "Student name",
+        student_placeholder_degree: "Academic degree / Program",
+        student_placeholder_text: "Brief description of the project, thesis topic or research line in which the student participates.",
+        student_placeholder_name_2: "Student name",
+        student_placeholder_degree_2: "Academic degree / Program",
+        student_placeholder_text_2: "Brief description of the project, thesis topic or research line in which the student participates.",
 
         publications_kicker: "Publications",
         publications_title: "Selected publications",
         publications_intro: "Representative publications from the laboratory and its members. This section will be updated with manuscripts, datasets, computational resources and code repositories as they become available.",
         publications_btn_scholar: "View Google Scholar",
-        publications_btn_github: "View GitHub",
 
         scripts_kicker: "Computational resources",
         scripts_title: "Genomics and metabolomics resources",
@@ -1031,16 +1100,6 @@
         status_development_2: "In development",
         genomics_repo_text: "Workflows for genetic variation analysis, gene-level summaries, variant annotation and genotype-phenotype association studies.",
         metabolomics_repo_text: "Workflows for metabolomics data processing, normalization, statistical analysis, biomarker exploration and visualization.",
-
-        principles_kicker: "Research principles",
-        principles_title: "Responsible and reproducible biomedical data science",
-        principles_intro: "We promote transparent computational workflows while protecting sensitive clinical and human-derived data.",
-        principles_card1_title: "Reproducibility",
-        principles_card1_text: "Clear documentation, version control, workflow organization and reusable analysis templates.",
-        principles_card2_title: "Responsible data use",
-        principles_card2_text: "Clinical or human-derived data are not publicly shared unless the corresponding approvals allow it.",
-        principles_card3_title: "Academic collaboration",
-        principles_card3_text: "We welcome academic collaborations in genomics, metabolomics, obesity, metabolism and precision health.",
 
         contact_title: "Contact and collaboration",
         contact_text: "Obesity Research Unit<br>Instituto Nacional de Ciencias Médicas y Nutrición Salvador Zubirán / UNAM",
