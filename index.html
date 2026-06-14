@@ -161,33 +161,47 @@
     }
 
     .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 110px 22px 80px;
       background:
-        radial-gradient(circle at 12% 22%, rgba(193, 42, 134, 0.10), transparent 34%),
-        radial-gradient(circle at 88% 18%, rgba(47, 191, 163, 0.12), transparent 30%),
+        radial-gradient(circle at 12% 22%, rgba(193, 42, 134, 0.08), transparent 34%),
+        radial-gradient(circle at 88% 18%, rgba(47, 191, 163, 0.10), transparent 30%),
         linear-gradient(135deg, #ffffff 0%, #f7fbfd 100%);
-      padding: 76px 22px 48px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("assets/logo.png");
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: min(1100px, 92%);
+      opacity: 0.10;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.80) 0%,
+        rgba(255, 255, 255, 0.82) 35%,
+        rgba(255, 255, 255, 0.88) 100%
+      );
+      z-index: 0;
+      pointer-events: none;
     }
 
     .hero-wrap {
-      max-width: 1180px;
+      position: relative;
+      z-index: 1;
+      max-width: 1080px;
       margin: 0 auto;
-      display: grid;
-      grid-template-columns: 0.92fr 1.08fr;
-      gap: 48px;
-      align-items: center;
-    }
-
-    .hero-logo {
-      background: var(--white);
-      border-radius: 30px;
-      padding: 34px;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border);
-    }
-
-    .hero-logo img {
-      width: 100%;
-      display: block;
     }
 
     .eyebrow {
@@ -205,6 +219,7 @@
       line-height: 0.98;
       margin: 0 0 22px;
       letter-spacing: -0.055em;
+      max-width: 900px;
     }
 
     .subtitle {
@@ -212,11 +227,12 @@
       font-size: clamp(1.1rem, 2vw, 1.45rem);
       font-weight: 800;
       margin-bottom: 22px;
+      max-width: 860px;
     }
 
     .hero p {
       font-size: 1.05rem;
-      max-width: 660px;
+      max-width: 760px;
       color: var(--muted);
       margin-bottom: 28px;
     }
@@ -360,7 +376,6 @@
       background: #f1f5f9;
     }
 
-    .member-placeholder,
     .student-placeholder {
       width: 140px;
       height: 140px;
@@ -492,7 +507,6 @@
     }
 
     @media (max-width: 960px) {
-      .hero-wrap,
       .grid.cols-3,
       .grid.cols-2,
       .contact-box {
@@ -500,11 +514,12 @@
       }
 
       .hero {
-        padding-top: 42px;
+        padding-top: 72px;
       }
 
-      .hero-logo {
-        order: -1;
+      .hero::before {
+        background-size: 96%;
+        background-position: center 36%;
       }
     }
 
@@ -515,7 +530,6 @@
       }
 
       .member-photo,
-      .member-placeholder,
       .student-photo,
       .student-placeholder {
         width: 120px;
@@ -540,8 +554,12 @@
       }
 
       .hero {
-        padding-left: 18px;
-        padding-right: 18px;
+        padding: 66px 18px 54px;
+      }
+
+      .hero::before {
+        background-size: 120%;
+        opacity: 0.08;
       }
     }
   </style>
@@ -582,24 +600,18 @@
 
   <section class="hero" id="top">
     <div class="hero-wrap">
-      <div class="hero-logo">
-        <img src="assets/logo.png" alt="Unidad de Investigación en Obesidad ICMNSZ / UNAM">
+      <div class="eyebrow">ICMNSZ / UNAM</div>
+      <h1 data-i18n="hero_title">Unidad de Investigación en Obesidad</h1>
+      <div class="subtitle" data-i18n="hero_subtitle">
+        Investigación en genómica y metabolómica aplicada a obesidad, metabolismo y salud de precisión.
       </div>
+      <p data-i18n="hero_text">
+        Estudiamos la complejidad molecular de la obesidad y las enfermedades metabólicas mediante genómica,
+        metabolómica, bioinformática y ciencia de datos biomédica reproducible.
+      </p>
 
-      <div>
-        <div class="eyebrow">ICMNSZ / UNAM</div>
-        <h1 data-i18n="hero_title">Unidad de Investigación en Obesidad</h1>
-        <div class="subtitle" data-i18n="hero_subtitle">
-          Investigación en genómica y metabolómica aplicada a obesidad, metabolismo y salud de precisión.
-        </div>
-        <p data-i18n="hero_text">
-          Estudiamos la complejidad molecular de la obesidad y las enfermedades metabólicas mediante genómica,
-          metabolómica, bioinformática y ciencia de datos biomédica reproducible.
-        </p>
-
-        <div class="buttons">
-          <a class="btn primary" href="#research" data-i18n="hero_btn_research">Explorar líneas de investigación</a>
-        </div>
+      <div class="buttons">
+        <a class="btn primary" href="#research" data-i18n="hero_btn_research">Explorar líneas de investigación</a>
       </div>
     </div>
   </section>
@@ -757,18 +769,6 @@
               </div>
             </div>
           </div>
-
-          <div class="card member">
-            <div class="member-placeholder">∞</div>
-            <div>
-              <h3 data-i18n="collaborators_title">Colaboradores</h3>
-              <div class="role" data-i18n="collaborators_role">Colaboraciones nacionales e internacionales</div>
-              <p data-i18n="collaborators_description">
-                Colaboramos con grupos clínicos, experimentales y computacionales interesados en obesidad, metabolismo,
-                genómica, metabolómica y salud de precisión.
-              </p>
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -776,10 +776,9 @@
     <section class="light" id="students">
       <div class="container">
         <div class="section-kicker" data-i18n="students_kicker">Estudiantes</div>
-        <h2 class="section-title" data-i18n="students_title">Estudiantes y personas en formación</h2>
+        <h2 class="section-title" data-i18n="students_title">Estudiantes</h2>
         <p class="section-intro" data-i18n="students_intro">
-          Esta sección integrará estudiantes de licenciatura, maestría, doctorado, servicio social, estancias académicas
-          y tesis vinculadas con los proyectos de genómica y metabolómica del laboratorio.
+          Esta sección incluirá estudiantes vinculados con proyectos de investigación del laboratorio, así como su grado académico, programa y línea de trabajo.
         </p>
 
         <div class="grid cols-2">
@@ -998,13 +997,10 @@
         ruth_description: "Investigadora principal de la Unidad de Investigación en Obesidad. Su trabajo se enfoca en obesidad, enfermedad metabólica, expresión génica, genómica, metabolitos y aproximaciones clínico-traslacionales para comprender la salud metabólica.",
         juan_role: "Investigador asociado",
         juan_description: "Investigador asociado enfocado en metabolómica, bioinformática, biología de sistemas, integración de datos ómicos y desarrollo de flujos de trabajo computacionales reproducibles para investigación en obesidad y metabolismo.",
-        collaborators_title: "Colaboradores",
-        collaborators_role: "Colaboraciones nacionales e internacionales",
-        collaborators_description: "Colaboramos con grupos clínicos, experimentales y computacionales interesados en obesidad, metabolismo, genómica, metabolómica y salud de precisión.",
 
         students_kicker: "Estudiantes",
-        students_title: "Estudiantes y personas en formación",
-        students_intro: "Esta sección integrará estudiantes de licenciatura, maestría, doctorado, servicio social, estancias académicas y tesis vinculadas con los proyectos de genómica y metabolómica del laboratorio.",
+        students_title: "Estudiantes",
+        students_intro: "Esta sección incluirá estudiantes vinculados con proyectos de investigación del laboratorio, así como su grado académico, programa y línea de trabajo.",
         student_placeholder_name: "Nombre del estudiante",
         student_placeholder_degree: "Grado académico / Programa",
         student_placeholder_text: "Breve descripción del proyecto, tema de tesis o línea de investigación en la que participa.",
@@ -1074,13 +1070,10 @@
         ruth_description: "Principal investigator of the Obesity Research Unit. Her work focuses on obesity, metabolic disease, gene expression, genomics, metabolites and clinical-translational approaches to understand metabolic health.",
         juan_role: "Associate Researcher",
         juan_description: "Associate researcher focused on metabolomics, bioinformatics, systems biology, omics data integration and the development of reproducible computational workflows for obesity and metabolism research.",
-        collaborators_title: "Collaborators",
-        collaborators_role: "National and international collaborations",
-        collaborators_description: "We collaborate with clinical, experimental and computational groups interested in obesity, metabolism, genomics, metabolomics and precision health.",
 
         students_kicker: "Students",
-        students_title: "Students and trainees",
-        students_intro: "This section will include undergraduate, MSc and PhD students, social service trainees, academic visitors and thesis projects linked to the laboratory's genomics and metabolomics research.",
+        students_title: "Students",
+        students_intro: "This section will include students linked to the laboratory's research projects, together with their academic degree, program and line of work.",
         student_placeholder_name: "Student name",
         student_placeholder_degree: "Academic degree / Program",
         student_placeholder_text: "Brief description of the project, thesis topic or research line in which the student participates.",
