@@ -216,39 +216,24 @@
     .btn.ghost { background: transparent; color: var(--ink); }
     .btn.ghost:hover { background: var(--ink); color: #fff; transform: translateY(-2px); }
 
-    /* Hero signature: omics orbit */
-    .orbit {
-      position: relative;
-      aspect-ratio: 1;
+    /* Hero signature: laboratory logo */
+    .hero-logo {
       width: 100%;
-      max-width: 380px;
-      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
-    .orbit svg { width: 100%; height: 100%; overflow: visible; }
-    .orbit .ring { fill: none; stroke: var(--line-strong); stroke-width: 1; }
-    .orbit .core {
-      fill: var(--ink);
+    .hero-logo img {
+      width: 100%;
+      max-width: 460px;
+      height: auto;
+      opacity: 0.96;
+      animation: logoIn 0.9s ease both;
     }
-    .orbit .core-label {
-      font-family: var(--display);
-      font-style: italic;
-      font-size: 15px;
-      fill: #fff;
-      text-anchor: middle;
+    @keyframes logoIn {
+      from { opacity: 0; transform: translateY(14px) scale(0.98); }
+      to   { opacity: 0.96; transform: none; }
     }
-    .node circle { stroke: #fff; stroke-width: 3; }
-    .node text {
-      font-family: var(--mono);
-      font-size: 9.5px;
-      font-weight: 600;
-      fill: var(--ink);
-      text-anchor: middle;
-      letter-spacing: 0.04em;
-    }
-    .spin { transform-origin: 190px 190px; animation: spin 60s linear infinite; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .counter { transform-origin: center; animation: counter 60s linear infinite; }
-    @keyframes counter { to { transform: rotate(-360deg); } }
 
     /* ---------- Sections ---------- */
     section.block {
@@ -529,7 +514,7 @@
     .reveal.in { opacity: 1; transform: none; }
 
     @media (prefers-reduced-motion: reduce) {
-      .spin, .counter { animation: none; }
+      .hero-logo img { animation: none; opacity: 0.96; }
       .reveal { opacity: 1; transform: none; transition: none; }
       html { scroll-behavior: auto; }
     }
@@ -537,7 +522,7 @@
     /* ---------- Responsive ---------- */
     @media (max-width: 920px) {
       .hero { grid-template-columns: 1fr; padding-top: 64px; gap: 36px; }
-      .orbit { max-width: 320px; order: -1; }
+      .hero-logo img { max-width: 360px; }
       .cols-2 { grid-template-columns: 1fr; }
       .contact-inner { grid-template-columns: 1fr; gap: 32px; }
     }
@@ -627,20 +612,8 @@
       </div>
     </div>
 
-    <div class="orbit" aria-hidden="true">
-      <svg viewBox="0 0 380 380">
-        <circle class="ring" cx="190" cy="190" r="135"/>
-        <circle class="ring" cx="190" cy="190" r="92"/>
-        <circle class="core" cx="190" cy="190" r="56"/>
-        <text class="core-label" x="190" y="186">salud de</text>
-        <text class="core-label" x="190" y="204">precisión</text>
-        <g class="spin">
-          <g class="node" transform="translate(190,55)"><g class="counter"><circle r="30" fill="var(--coral)"/><text y="3">GENOMA</text></g></g>
-          <g class="node" transform="translate(325,190)"><g class="counter"><circle r="30" fill="var(--teal)"/><text y="3">METABOLOMA</text></g></g>
-          <g class="node" transform="translate(190,325)"><g class="counter"><circle r="30" fill="var(--gold)"/><text y="3">FENOTIPO</text></g></g>
-          <g class="node" transform="translate(55,190)"><g class="counter"><circle r="30" fill="var(--ink-2)"/><text y="3" fill="#fff">CLÍNICA</text></g></g>
-        </g>
-      </svg>
+    <div class="hero-logo">
+      <img src="assets/logo.png" alt="Unidad de Investigación en Obesidad · ICMNSZ / UNAM">
     </div>
   </section>
 
