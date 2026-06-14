@@ -80,33 +80,10 @@
       color: var(--ink);
     }
 
-    .brand-mark {
-      width: 38px;
-      height: 38px;
-      border-radius: 11px;
-      background: var(--ink);
-      color: #fff;
-      display: grid;
-      place-items: center;
-      font-family: var(--display);
-      font-weight: 600;
-      font-size: 1.15rem;
-      flex: none;
-    }
-
-    .brand-text {
-      font-weight: 700;
-      font-size: 0.82rem;
-      line-height: 1.2;
-      letter-spacing: 0.01em;
-    }
-    .brand-text small {
+    .brand-logo {
+      height: 44px;
+      width: auto;
       display: block;
-      color: var(--mist);
-      font-weight: 600;
-      font-size: 0.72rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
     }
 
     .nav-right {
@@ -592,6 +569,7 @@
     }
 
     @media (max-width: 540px) {
+      .brand-logo { height: 34px; }
       .member, .student { grid-template-columns: 1fr; }
       .research-item { grid-template-columns: 1fr; gap: 8px; }
       .pub { grid-template-columns: 1fr; gap: 10px; }
@@ -605,11 +583,7 @@
   <header>
     <div class="nav">
       <a class="brand" href="#top" aria-label="Inicio">
-        <span class="brand-mark">U</span>
-        <span class="brand-text">
-          <span data-i18n="brand">Unidad de Investigación en Obesidad</span>
-          <small>ICMNSZ · UNAM</small>
-        </span>
+        <img class="brand-logo" src="assets/logo.png" alt="Unidad de Investigación en Obesidad · ICMNSZ / UNAM">
       </a>
 
       <div class="nav-right">
