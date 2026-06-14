@@ -1,28 +1,843 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Unidad de Investigación en Obesidad</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Unidad de Investigación en Obesidad | ICMNSZ / UNAM</title>
+
+  <meta name="description" content="Unidad de Investigación en Obesidad. Genomics and metabolomics research for obesity, metabolism and precision health at ICMNSZ / UNAM.">
+  <meta name="keywords" content="obesity, genomics, metabolomics, omics, bioinformatics, precision health, ICMNSZ, UNAM">
+
+  <style>
+    :root {
+      --navy: #15324a;
+      --blue: #2f6078;
+      --cyan: #2fbfa3;
+      --pink: #c12a86;
+      --yellow: #f3d21b;
+      --light: #f7f9fb;
+      --text: #1e2933;
+      --muted: #607080;
+      --white: #ffffff;
+      --border: #e2e8f0;
+      --shadow: 0 18px 45px rgba(21, 50, 74, 0.12);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    a:hover {
+      color: var(--pink);
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 14px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--navy);
+      font-weight: 900;
+      letter-spacing: 0.02em;
+    }
+
+    .brand img {
+      height: 46px;
+      width: auto;
+    }
+
+    .brand span {
+      font-size: 0.92rem;
+      line-height: 1.15;
+    }
+
+    nav {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    nav a {
+      color: var(--navy);
+      font-size: 0.88rem;
+      font-weight: 800;
+    }
+
+    .hero {
+      background:
+        radial-gradient(circle at 12% 22%, rgba(193, 42, 134, 0.10), transparent 34%),
+        radial-gradient(circle at 88% 18%, rgba(47, 191, 163, 0.12), transparent 30%),
+        linear-gradient(135deg, #ffffff 0%, #f7fbfd 100%);
+      padding: 76px 22px 48px;
+    }
+
+    .hero-wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .hero-logo {
+      background: var(--white);
+      border-radius: 30px;
+      padding: 34px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+
+    .hero-logo img {
+      width: 100%;
+      display: block;
+    }
+
+    .eyebrow {
+      color: var(--pink);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-weight: 900;
+      font-size: 0.78rem;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      color: var(--navy);
+      font-size: clamp(2.2rem, 5vw, 4.8rem);
+      line-height: 0.98;
+      margin: 0 0 22px;
+      letter-spacing: -0.055em;
+    }
+
+    .subtitle {
+      color: var(--blue);
+      font-size: clamp(1.1rem, 2vw, 1.45rem);
+      font-weight: 800;
+      margin-bottom: 22px;
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      max-width: 660px;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 22px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 18px;
+      border-radius: 999px;
+      font-weight: 900;
+      font-size: 0.92rem;
+      border: 2px solid var(--navy);
+      transition: 0.2s ease;
+    }
+
+    .btn.primary {
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .btn.secondary {
+      background: transparent;
+      color: var(--navy);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    main section {
+      padding: 72px 22px;
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      color: var(--navy);
+      font-size: clamp(1.8rem, 3vw, 2.7rem);
+      line-height: 1.05;
+      margin: 0 0 12px;
+      letter-spacing: -0.035em;
+    }
+
+    .section-kicker {
+      color: var(--pink);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.78rem;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+
+    .section-intro {
+      color: var(--muted);
+      max-width: 850px;
+      font-size: 1.04rem;
+      margin: 0 0 36px;
+    }
+
+    .light {
+      background: var(--light);
+    }
+
+    .grid {
+      display: grid;
+      gap: 22px;
+    }
+
+    .grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .grid.cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: 0 12px 28px rgba(21, 50, 74, 0.06);
+    }
+
+    .card h3 {
+      color: var(--navy);
+      margin: 0 0 10px;
+      font-size: 1.18rem;
+      line-height: 1.2;
+    }
+
+    .card p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .tag {
+      background: #edf7f5;
+      color: var(--blue);
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 900;
+    }
+
+    .member {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .member-photo {
+      width: 140px;
+      height: 140px;
+      border-radius: 28px;
+      object-fit: cover;
+      object-position: center;
+      border: 4px solid #ffffff;
+      box-shadow: 0 12px 28px rgba(21, 50, 74, 0.18);
+      background: #f1f5f9;
+    }
+
+    .member-placeholder {
+      width: 140px;
+      height: 140px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, var(--cyan), var(--pink));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 2.3rem;
+      font-weight: 900;
+      box-shadow: 0 12px 28px rgba(21, 50, 74, 0.18);
+    }
+
+    .role {
+      color: var(--pink);
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+
+    .publication {
+      border-left: 5px solid var(--blue);
+      padding-left: 18px;
+      margin-bottom: 22px;
+      background: var(--white);
+      padding-top: 14px;
+      padding-bottom: 14px;
+      padding-right: 18px;
+      border-radius: 0 18px 18px 0;
+    }
+
+    .publication h3 {
+      margin: 0 0 6px;
+      color: var(--navy);
+      font-size: 1.05rem;
+    }
+
+    .publication p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .repo-card {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .repo-name {
+      font-family: Consolas, Monaco, monospace;
+      color: var(--navy);
+      font-weight: 900;
+      font-size: 1rem;
+    }
+
+    .status {
+      display: inline-block;
+      width: fit-content;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: #fff7db;
+      color: #8a6200;
+      font-size: 0.74rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .contact-box {
+      background: var(--navy);
+      color: var(--white);
+      border-radius: 30px;
+      padding: 38px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .contact-box h2 {
+      color: var(--white);
+      margin: 0 0 12px;
+      font-size: 2rem;
+      line-height: 1.1;
+    }
+
+    .contact-box p {
+      color: #d9e6ef;
+      margin: 0 0 8px;
+    }
+
+    .contact-box a {
+      color: var(--white);
+      text-decoration: underline;
+    }
+
+    footer {
+      padding: 28px 22px;
+      background: #0d2234;
+      color: #d9e6ef;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 900px) {
+      .hero-wrap,
+      .grid.cols-3,
+      .grid.cols-2,
+      .contact-box {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      nav {
+        justify-content: flex-start;
+      }
+
+      .hero {
+        padding-top: 42px;
+      }
+
+      .hero-logo {
+        order: -1;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .member {
+        grid-template-columns: 1fr;
+      }
+
+      .member-photo,
+      .member-placeholder {
+        width: 120px;
+        height: 120px;
+        border-radius: 24px;
+      }
+
+      .brand img {
+        height: 38px;
+      }
+
+      .brand span {
+        font-size: 0.8rem;
+      }
+
+      nav {
+        gap: 12px;
+      }
+
+      main section {
+        padding: 54px 18px;
+      }
+
+      .hero {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Unidad de Investigación en Obesidad</h1>
-  <p><strong>ICMNSZ / UNAM</strong></p>
-  <p>Integrative omics research for obesity, metabolism and precision health.</p>
+  <header>
+    <div class="nav">
+      <a class="brand" href="#top">
+        <img src="assets/logo.png" alt="Unidad de Investigación en Obesidad logo">
+        <span>Unidad de Investigación<br>en Obesidad</span>
+      </a>
 
-  <h2>About us</h2>
-  <p>
-    The Unidad de Investigación en Obesidad focuses on integrative omics,
-    metabolism, obesity and precision health.
-  </p>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#research">Research</a>
+        <a href="#members">Members</a>
+        <a href="#publications">Publications</a>
+        <a href="#scripts">Scripts</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
 
-  <h2>Research areas</h2>
-  <ul>
-    <li>Genomics and genetic variation</li>
-    <li>Integrative multi-omics</li>
-    <li>Metabolomics and lipidomics</li>
-    <li>Transcriptomics and gene expression</li>
-    <li>Biomarker discovery</li>
-  </ul>
+  <section class="hero" id="top">
+    <div class="hero-wrap">
+      <div class="hero-logo">
+        <img src="assets/logo.png" alt="Unidad de Investigación en Obesidad ICMNSZ / UNAM">
+      </div>
+
+      <div>
+        <div class="eyebrow">ICMNSZ / UNAM</div>
+        <h1>Unidad de Investigación en Obesidad</h1>
+        <div class="subtitle">Genomics and metabolomics research for obesity, metabolism and precision health.</div>
+        <p>
+          We study the molecular complexity of obesity and metabolic disease through genomics,
+          metabolomics, bioinformatics and reproducible biomedical data science.
+        </p>
+
+        <div class="buttons">
+          <a class="btn primary" href="#research">Explore research areas</a>
+          <a class="btn secondary" href="https://github.com/uiounam" target="_blank" rel="noopener">GitHub organization</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section id="about">
+      <div class="container">
+        <div class="section-kicker">About the lab</div>
+        <h2 class="section-title">A translational omics laboratory focused on obesity and metabolic health.</h2>
+        <p class="section-intro">
+          The Unidad de Investigación en Obesidad integrates clinical, molecular and computational approaches
+          to investigate obesity, metabolic dysfunction and response to therapeutic interventions.
+          At this stage, the laboratory focuses on genomics and metabolomics as core analytical platforms.
+        </p>
+
+        <div class="grid cols-3">
+          <div class="card">
+            <h3>Genomics</h3>
+            <p>
+              We analyze genetic variation and gene-level information to explore biological mechanisms
+              associated with obesity and metabolic disease.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Metabolomics</h3>
+            <p>
+              We identify metabolic signatures linked to obesity, metabolic health, disease progression
+              and response to clinical or nutritional interventions.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Reproducible research</h3>
+            <p>
+              We develop documented computational workflows, scripts and analysis templates to promote
+              transparency, reuse and responsible biomedical data science.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="light" id="research">
+      <div class="container">
+        <div class="section-kicker">Research areas</div>
+        <h2 class="section-title">Core scientific lines</h2>
+        <p class="section-intro">
+          Our current work is centered on genomics, metabolomics, obesity, metabolism and precision health.
+        </p>
+
+        <div class="grid cols-2">
+          <div class="card">
+            <h3>Genomics of obesity and metabolic disease</h3>
+            <p>
+              Analysis of genetic variation, gene-level signals and genotype-phenotype relationships
+              to better understand obesity-related traits and metabolic risk.
+            </p>
+            <div class="tag-row">
+              <span class="tag">genomics</span>
+              <span class="tag">variants</span>
+              <span class="tag">gene-level analysis</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Metabolomics and metabolic phenotyping</h3>
+            <p>
+              Characterization of metabolites and metabolic pathways associated with obesity,
+              insulin resistance, metabolic dysfunction and intervention response.
+            </p>
+            <div class="tag-row">
+              <span class="tag">metabolomics</span>
+              <span class="tag">metabolic signatures</span>
+              <span class="tag">biomarkers</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Bioinformatics and biomedical data science</h3>
+            <p>
+              Development of computational strategies for omics analysis, statistical modeling,
+              visualization and reproducible biomedical research.
+            </p>
+            <div class="tag-row">
+              <span class="tag">bioinformatics</span>
+              <span class="tag">statistics</span>
+              <span class="tag">visualization</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Precision health in obesity</h3>
+            <p>
+              Integration of molecular and clinical information to support biomarker discovery,
+              patient stratification and personalized intervention strategies.
+            </p>
+            <div class="tag-row">
+              <span class="tag">precision health</span>
+              <span class="tag">clinical translation</span>
+              <span class="tag">obesity</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="members">
+      <div class="container">
+        <div class="section-kicker">Members</div>
+        <h2 class="section-title">Lab members</h2>
+        <p class="section-intro">
+          Our laboratory brings together expertise in obesity research, genomics, metabolomics,
+          bioinformatics and translational biomedical science.
+        </p>
+
+        <div class="grid cols-2">
+          <div class="card member">
+            <img class="member-photo" src="assets/members/ruth.jpg" alt="Dra. Ruth Gutiérrez Aguilar">
+            <div>
+              <h3>Dra. Ruth Gutiérrez Aguilar</h3>
+              <div class="role">Laboratory Lead / Principal Investigator</div>
+              <p>
+                Principal investigator of the Unidad de Investigación en Obesidad. Her research focuses on
+                obesity, metabolic disease, gene expression, genomics, metabolites and clinical-translational
+                approaches to understand metabolic health.
+              </p>
+              <div class="tag-row">
+                <a class="tag" href="https://scholar.google.com/citations?user=ctMDw4IAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
+                <span class="tag">Obesity</span>
+                <span class="tag">Genomics</span>
+                <span class="tag">Metabolism</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card member">
+            <img class="member-photo" src="assets/members/Juan%20Jose.png" alt="Dr. Juan José Oropeza-Valdez">
+            <div>
+              <h3>Dr. Juan José Oropeza-Valdez</h3>
+              <div class="role">Associate Researcher</div>
+              <p>
+                Associate researcher focused on metabolomics, bioinformatics, systems biology,
+                omics data integration and reproducible computational workflows for obesity
+                and metabolic research.
+              </p>
+              <div class="tag-row">
+                <span class="tag">Metabolomics</span>
+                <span class="tag">Bioinformatics</span>
+                <span class="tag">Systems biology</span>
+                <span class="tag">Reproducible research</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card member">
+            <div class="member-placeholder">+</div>
+            <div>
+              <h3>Students and trainees</h3>
+              <div class="role">Undergraduate, MSc, PhD and visiting students</div>
+              <p>
+                This section will include current students, thesis projects, visiting researchers
+                and trainees contributing to genomics and metabolomics projects in the laboratory.
+              </p>
+            </div>
+          </div>
+
+          <div class="card member">
+            <div class="member-placeholder">∞</div>
+            <div>
+              <h3>Collaborators</h3>
+              <div class="role">National and international collaborations</div>
+              <p>
+                We collaborate with clinical, experimental and computational groups interested
+                in obesity, metabolism, genomics, metabolomics and precision health.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="light" id="publications">
+      <div class="container">
+        <div class="section-kicker">Publications</div>
+        <h2 class="section-title">Selected publications</h2>
+        <p class="section-intro">
+          Representative publications from the laboratory and its members. This section will be updated
+          with manuscripts, datasets, computational resources and code repositories as they become available.
+        </p>
+
+        <div class="publication">
+          <h3>Differential Gene Expression of Subcutaneous Adipose Tissue among Lean, Obese, and after RYGB: Systematic Review and Analysis</h3>
+          <p>
+            Cruz-García EM, Frigolet ME, Canizales-Quinteros S, Gutiérrez-Aguilar R.
+            <em>Nutrients</em>. 2022;14(22):4925.
+          </p>
+        </div>
+
+        <div class="publication">
+          <h3>Effect of the Melanocortin 4-Receptor Ile269Asn Mutation on Weight Loss Response to Dietary, Phentermine and Bariatric Surgery Interventions</h3>
+          <p>
+            Salazar-Valencia IG, Villamil-Ramírez H, Barajas-Olmos F, Guevara-Cruz M, Macias-Kauffer LR,
+            García-Ortiz H, et al. <em>Genes</em>. 2022;13(12):2267.
+          </p>
+        </div>
+
+        <div class="publication">
+          <h3>Trans-palmitoleic acid prevents weight gain, but does not modify glucose homeostasis in a rodent model of diet-induced obesity</h3>
+          <p>
+            Chávaro-Ortiz LI, Tapia BD, Navarrete-Fuentes M, Gutiérrez-Aguilar R, Frigolet ME.
+            <em>Clinical Nutrition Open Science</em>. 2022;44:42-48.
+          </p>
+        </div>
+
+        <div class="buttons">
+          <a class="btn primary" href="https://scholar.google.com/citations?user=ctMDw4IAAAAJ&hl=en" target="_blank" rel="noopener">View Google Scholar</a>
+          <a class="btn secondary" href="https://github.com/uiounam" target="_blank" rel="noopener">View GitHub</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="scripts">
+      <div class="container">
+        <div class="section-kicker">Scripts and resources</div>
+        <h2 class="section-title">Genomics and metabolomics resources</h2>
+        <p class="section-intro">
+          Our computational resources are currently being developed and documented.
+          At this stage, the laboratory focuses on genomics and metabolomics workflows.
+          Public releases will include documentation, examples, citation information and
+          reproducible environments whenever possible.
+        </p>
+
+        <div class="grid cols-2">
+          <div class="card repo-card">
+            <span class="status">In development</span>
+            <div class="repo-name">genomics-workflows</div>
+            <p>
+              Workflows for genetic variation analysis, gene-level summaries,
+              variant annotation and genotype-phenotype association studies.
+            </p>
+            <div class="tag-row">
+              <span class="tag">genomics</span>
+              <span class="tag">variants</span>
+              <span class="tag">annotation</span>
+              <span class="tag">association studies</span>
+            </div>
+          </div>
+
+          <div class="card repo-card">
+            <span class="status">In development</span>
+            <div class="repo-name">metabolomics-workflows</div>
+            <p>
+              Workflows for metabolomics data processing, normalization,
+              statistical analysis, biomarker exploration and visualization.
+            </p>
+            <div class="tag-row">
+              <span class="tag">metabolomics</span>
+              <span class="tag">biomarkers</span>
+              <span class="tag">statistics</span>
+              <span class="tag">visualization</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="light" id="principles">
+      <div class="container">
+        <div class="section-kicker">Research principles</div>
+        <h2 class="section-title">Responsible and reproducible biomedical data science</h2>
+        <p class="section-intro">
+          We promote transparent computational workflows while protecting sensitive clinical and human-derived data.
+        </p>
+
+        <div class="grid cols-3">
+          <div class="card">
+            <h3>Reproducibility</h3>
+            <p>
+              Clear documentation, version control, workflow organization and reusable analysis templates.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Responsible data use</h3>
+            <p>
+              Restricted clinical or human-derived datasets are not publicly shared unless appropriate approvals allow it.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Collaboration</h3>
+            <p>
+              We welcome academic collaborations in genomics, metabolomics, obesity, metabolism and precision health.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="contact-box">
+          <div>
+            <h2>Contact and collaboration</h2>
+            <p>
+              Unidad de Investigación en Obesidad<br>
+              Instituto Nacional de Ciencias Médicas y Nutrición Salvador Zubirán / UNAM
+            </p>
+          </div>
+
+          <div>
+            <p><strong>Email:</strong> <a href="mailto:uiobesidad@facmed.unam.mx">uiobesidad@facmed.unam.mx</a></p>
+            <p><strong>GitHub:</strong> <a href="https://github.com/uiounam" target="_blank" rel="noopener">github.com/uiounam</a></p>
+            <p><strong>Website:</strong> <a href="https://uiounam.github.io" target="_blank" rel="noopener">uiounam.github.io</a></p>
+            <p><strong>Google Scholar:</strong> <a href="https://scholar.google.com/citations?user=ctMDw4IAAAAJ&hl=en" target="_blank" rel="noopener">Dra. Ruth Gutiérrez Aguilar</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Unidad de Investigación en Obesidad · ICMNSZ / UNAM ·
+    <a href="https://github.com/uiounam" target="_blank" rel="noopener">GitHub</a>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
