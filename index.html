@@ -361,35 +361,50 @@
     }
     .member p { margin: 0 0 16px; color: var(--slate); font-size: 0.96rem; }
 
-    /* Students */
-    .student {
-      background: var(--white);
-      border: 1px dashed var(--line-strong);
+    /* Google Scholar tag with logo */
+    .tag.scholar {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink);
+    }
+    .tag.scholar svg { width: 13px; height: 13px; fill: #fff; }
+    .tag.scholar:hover { background: var(--coral); border-color: var(--coral); }
+
+    /* Join the lab card */
+    .join {
+      margin-top: 30px;
+      background: var(--ink);
+      color: #e7eef4;
       border-radius: var(--radius-lg);
-      padding: 28px;
+      padding: 30px 34px;
       display: grid;
-      grid-template-columns: 84px 1fr;
-      gap: 22px;
-      align-items: start;
+      grid-template-columns: auto 1fr auto;
+      gap: 24px;
+      align-items: center;
     }
-    .student-photo {
-      width: 84px; height: 84px;
-      border-radius: 18px;
-      object-fit: cover;
-      background: var(--panel);
-    }
-    .student-ph {
-      width: 84px; height: 84px;
-      border-radius: 18px;
+    .join-mark {
+      width: 56px; height: 56px;
+      border-radius: 16px;
       display: grid; place-items: center;
-      background: var(--panel);
-      color: var(--mist);
+      background: rgba(255,255,255,0.10);
+      color: #79c8bd;
       font-family: var(--display);
       font-size: 2rem;
+      flex: none;
     }
-    .student h3 { font-family: var(--display); font-weight: 600; font-size: 1.15rem; margin: 0 0 4px; color: var(--ink-2); }
-    .student .degree { color: var(--slate); font-weight: 600; font-size: 0.85rem; margin-bottom: 10px; }
-    .student p { margin: 0 0 14px; color: var(--mist); font-size: 0.94rem; }
+    .join-body h3 {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 1.35rem;
+      margin: 0 0 6px;
+      color: #fff;
+    }
+    .join-body p { margin: 0; color: #aec3d2; font-size: 0.97rem; max-width: 46em; }
+    .join-btn { border-color: #fff; background: #fff; color: var(--ink); white-space: nowrap; }
+    .join-btn:hover { background: var(--coral); border-color: var(--coral); color: #fff; }
 
     /* Publications */
     .pub {
@@ -555,10 +570,12 @@
 
     @media (max-width: 540px) {
       .brand-logo { height: 34px; }
-      .member, .student { grid-template-columns: 1fr; }
+      .member { grid-template-columns: 1fr; }
       .research-item { grid-template-columns: 1fr; gap: 8px; }
       .pub { grid-template-columns: 1fr; gap: 10px; }
       .contact-row { grid-template-columns: 1fr; gap: 2px; }
+      .join { grid-template-columns: 1fr; text-align: left; }
+      .join-btn { justify-self: start; }
       h1 { font-size: clamp(2.1rem, 9vw, 3rem); }
     }
   </style>
@@ -575,7 +592,6 @@
         <nav class="menu" id="menu">
           <a href="#research" data-i18n="nav_research">Investigación</a>
           <a href="#members" data-i18n="nav_members">Equipo</a>
-          <a href="#students" data-i18n="nav_students">Estudiantes</a>
           <a href="#publications" data-i18n="nav_publications">Publicaciones</a>
           <a href="#scripts" data-i18n="nav_scripts">Recursos</a>
           <a href="#contact" data-i18n="nav_contact">Contacto</a>
@@ -666,12 +682,13 @@
       </div>
     </section>
 
-    <!-- ---------- Members ---------- -->
+    <!-- ---------- Team (members + students) ---------- -->
     <section class="block reveal" id="members">
       <div class="kicker"><span class="num">02</span><span data-i18n="members_kicker">Equipo</span></div>
       <h2 class="title" data-i18n="members_title">Quién está detrás del trabajo.</h2>
       <p class="intro" data-i18n="members_intro">
-        Investigación clínica, genómica, metabolómica y bioinformática reunidas en un mismo grupo.
+        Investigadores y estudiantes que comparten un mismo grupo: investigación clínica, genómica,
+        metabolómica y bioinformática.
       </p>
 
       <div class="grid cols-2">
@@ -681,60 +698,50 @@
             <h3>Dra. Ruth Gutiérrez Aguilar</h3>
             <div class="role" data-i18n="ruth_role">Investigadora principal · Líder del laboratorio</div>
             <p data-i18n="ruth_desc">Estudia obesidad, enfermedad metabólica y expresión génica con un enfoque clínico-traslacional para entender la salud metabólica.</p>
-            <div class="tags"><a class="tag" href="https://scholar.google.com/citations?user=ctMDw4IAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar ↗</a><span class="tag">obesidad</span><span class="tag">genómica</span></div>
+            <div class="tags">
+              <a class="tag scholar" href="https://scholar.google.com/citations?user=ctMDw4IAAAAJ&hl=en" target="_blank" rel="noopener" aria-label="Google Scholar de la Dra. Ruth Gutiérrez Aguilar">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.162 4.44L24 9.5z"/></svg>
+                Google Scholar
+              </a>
+              <span class="tag">obesidad</span><span class="tag">genómica</span>
+            </div>
           </div>
         </div>
 
         <div class="member">
-          <img class="member-photo" src="assets/members/Juan-Jose.png" alt="Dr. Juan José Oropeza-Valdez">
+          <img class="member-photo" src="assets/members/Juan-Jose.jpg" alt="Dr. Juan José Oropeza-Valdez">
           <div>
             <h3>Dr. Juan José Oropeza-Valdez</h3>
             <div class="role" data-i18n="juan_role">Investigador asociado</div>
-            <p data-i18n="juan_desc">Trabaja en metabolómica, biología de sistemas e integración de datos ómicos, construyendo flujos computacionales reproducibles.</p>
-            <div class="tags"><span class="tag">metabolómica</span><span class="tag">biología de sistemas</span><span class="tag">bioinformática</span></div>
+            <p data-i18n="juan_desc">Trabaja en metabolómica, biología de sistemas, bioinformática y ciencia de datos.</p>
+            <div class="tags">
+              <a class="tag scholar" href="https://scholar.google.com/citations?user=KqrteMQAAAAJ&hl=en" target="_blank" rel="noopener" aria-label="Google Scholar del Dr. Juan José Oropeza-Valdez">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.162 4.44L24 9.5z"/></svg>
+                Google Scholar
+              </a>
+              <span class="tag">metabolómica</span><span class="tag">bioinformática</span>
+            </div>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- ---------- Students ---------- -->
-    <section class="block tint reveal" id="students">
-      <div class="inner">
-        <div class="kicker"><span class="num">03</span><span data-i18n="students_kicker">Estudiantes</span></div>
-        <h2 class="title" data-i18n="students_title">Formando a la próxima generación.</h2>
-        <p class="intro" data-i18n="students_intro">
-          Pronto se sumarán aquí los estudiantes del laboratorio, con su programa y línea de tesis.
-        </p>
-
-        <div class="grid cols-2">
-          <div class="student">
-            <div class="student-ph">+</div>
-            <div>
-              <h3 data-i18n="st_name">Tu lugar aquí</h3>
-              <div class="degree" data-i18n="st_degree">Licenciatura · Maestría · Doctorado</div>
-              <p data-i18n="st_text">¿Te interesa la genómica o la metabolómica de la obesidad? Escríbenos para colaborar.</p>
-              <div class="tags"><span class="tag">tesis</span><span class="tag">genómica</span><span class="tag">metabolómica</span></div>
-            </div>
-          </div>
-          <div class="student">
-            <div class="student-ph">+</div>
-            <div>
-              <h3 data-i18n="st_name2">Espacio disponible</h3>
-              <div class="degree" data-i18n="st_degree2">Servicio social · Estancia · Posgrado</div>
-              <p data-i18n="st_text2">Proyectos abiertos en bioinformática y análisis de datos biomédicos.</p>
-              <div class="tags"><span class="tag">bioinformática</span><span class="tag">datos</span><span class="tag">obesidad</span></div>
-            </div>
-          </div>
+      <!-- Join card: students are part of the lab -->
+      <div class="join">
+        <div class="join-mark">+</div>
+        <div class="join-body">
+          <h3 data-i18n="join_title">¿Quieres formar parte del laboratorio?</h3>
+          <p data-i18n="join_text">Recibimos estudiantes de licenciatura, posgrado, servicio social y estancias en proyectos de genómica, metabolómica y bioinformática de la obesidad.</p>
         </div>
+        <a class="btn primary join-btn" href="mailto:uiounam@gmail.com?subject=Interés%20en%20unirme%20al%20laboratorio" data-i18n="join_btn">Escríbenos ↗</a>
       </div>
     </section>
 
     <!-- ---------- Publications ---------- -->
     <section class="block reveal" id="publications">
-      <div class="kicker"><span class="num">04</span><span data-i18n="pub_kicker">Publicaciones</span></div>
+      <div class="kicker"><span class="num">03</span><span data-i18n="pub_kicker">Publicaciones</span></div>
       <h2 class="title" data-i18n="pub_title">Trabajo seleccionado.</h2>
       <p class="intro" data-i18n="pub_intro">
-        Artículos representativos del grupo. Se irá ampliando con manuscritos, datos y código.
+        Artículos representativos del grupo.
       </p>
 
       <div class="pub">
@@ -769,7 +776,7 @@
     <!-- ---------- Resources ---------- -->
     <section class="block tint reveal" id="scripts">
       <div class="inner">
-        <div class="kicker"><span class="num">05</span><span data-i18n="scripts_kicker">Recursos computacionales</span></div>
+        <div class="kicker"><span class="num">04</span><span data-i18n="scripts_kicker">Recursos computacionales</span></div>
         <h2 class="title" data-i18n="scripts_title">Código abierto y reproducible.</h2>
         <p class="intro" data-i18n="scripts_intro">
           Estos repositorios están en desarrollo. Las versiones públicas incluirán documentación,
@@ -802,7 +809,7 @@
     <section class="contact-wrap reveal" id="contact">
       <div class="contact-inner">
         <div>
-          <div class="kicker"><span class="num">06</span><span data-i18n="contact_kicker">Contacto</span></div>
+          <div class="kicker"><span class="num">05</span><span data-i18n="contact_kicker">Contacto</span></div>
           <h2 data-i18n="contact_title">Colaboremos.</h2>
           <p data-i18n="contact_text">Buscamos colaboraciones, estudiantes y proyectos en genómica y metabolómica de la obesidad.</p>
         </div>
@@ -826,7 +833,7 @@
     const translations = {
       es: {
         brand: "Unidad de Investigación en Obesidad",
-        nav_research: "Investigación", nav_members: "Equipo", nav_students: "Estudiantes",
+        nav_research: "Investigación", nav_members: "Equipo",
         nav_publications: "Publicaciones", nav_scripts: "Recursos", nav_contact: "Contacto",
 
         hero_eyebrow: "Instituto Nacional de Ciencias Médicas y Nutrición · UNAM",
@@ -848,19 +855,14 @@
 
         members_kicker: "Equipo",
         members_title: "Quién está detrás del trabajo.",
-        members_intro: "Investigación clínica, genómica, metabolómica y bioinformática reunidas en un mismo grupo.",
+        members_intro: "Investigadores y estudiantes que comparten un mismo grupo: investigación clínica, genómica, metabolómica y bioinformática.",
         ruth_role: "Investigadora principal · Líder del laboratorio",
         ruth_desc: "Estudia obesidad, enfermedad metabólica y expresión génica con un enfoque clínico-traslacional para entender la salud metabólica.",
         juan_role: "Investigador asociado",
         juan_desc: "Trabaja en metabolómica, biología de sistemas e integración de datos ómicos, construyendo flujos computacionales reproducibles.",
-
-        students_kicker: "Estudiantes",
-        students_title: "Formando a la próxima generación.",
-        students_intro: "Pronto se sumarán aquí los estudiantes del laboratorio, con su programa y línea de tesis.",
-        st_name: "Tu lugar aquí", st_degree: "Licenciatura · Maestría · Doctorado",
-        st_text: "¿Te interesa la genómica o la metabolómica de la obesidad? Escríbenos para colaborar.",
-        st_name2: "Espacio disponible", st_degree2: "Servicio social · Estancia · Posgrado",
-        st_text2: "Proyectos abiertos en bioinformática y análisis de datos biomédicos.",
+        join_title: "¿Quieres formar parte del laboratorio?",
+        join_text: "Recibimos estudiantes de licenciatura, posgrado, servicio social y estancias en proyectos de genómica, metabolómica y bioinformática de la obesidad.",
+        join_btn: "Escríbenos ↗",
 
         pub_kicker: "Publicaciones", pub_title: "Trabajo seleccionado.",
         pub_intro: "Artículos representativos del grupo. Se irá ampliando con manuscritos, datos y código.",
@@ -878,7 +880,7 @@
       },
       en: {
         brand: "Obesity Research Unit",
-        nav_research: "Research", nav_members: "Team", nav_students: "Students",
+        nav_research: "Research", nav_members: "Team",
         nav_publications: "Publications", nav_scripts: "Resources", nav_contact: "Contact",
 
         hero_eyebrow: "National Institute of Medical Sciences & Nutrition · UNAM",
@@ -900,19 +902,14 @@
 
         members_kicker: "Team",
         members_title: "The people behind the work.",
-        members_intro: "Clinical research, genomics, metabolomics and bioinformatics gathered in one group.",
+        members_intro: "Researchers and students sharing one group: clinical research, genomics, metabolomics and bioinformatics.",
         ruth_role: "Principal Investigator · Lab Lead",
         ruth_desc: "Studies obesity, metabolic disease and gene expression with a clinical-translational approach to understand metabolic health.",
         juan_role: "Associate Researcher",
         juan_desc: "Works on metabolomics, systems biology and omics data integration, building reproducible computational pipelines.",
-
-        students_kicker: "Students",
-        students_title: "Training the next generation.",
-        students_intro: "Lab students will soon appear here, with their program and thesis line.",
-        st_name: "Your spot here", st_degree: "BSc · MSc · PhD",
-        st_text: "Interested in the genomics or metabolomics of obesity? Reach out to collaborate.",
-        st_name2: "Open position", st_degree2: "Internship · Rotation · Graduate",
-        st_text2: "Open projects in bioinformatics and biomedical data analysis.",
+        join_title: "Want to join the lab?",
+        join_text: "We welcome undergraduate and graduate students, social service and research stays in genomics, metabolomics and bioinformatics of obesity.",
+        join_btn: "Get in touch ↗",
 
         pub_kicker: "Publications", pub_title: "Selected work.",
         pub_intro: "Representative articles from the group. It will grow with manuscripts, data and code.",
