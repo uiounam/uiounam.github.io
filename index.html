@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Unidad de Investigación en Obesidad | ICMNSZ / UNAM</title>
 
-  <meta name="description" content="Unidad de Investigación en Obesidad. Genomics and metabolomics research for obesity, metabolism and precision health at ICMNSZ / UNAM.">
-  <meta name="keywords" content="obesity, genomics, metabolomics, omics, bioinformatics, precision health, ICMNSZ, UNAM">
+  <meta name="description" content="Unidad de Investigación en Obesidad. Investigación en genómica y metabolómica aplicada a obesidad, metabolismo y salud de precisión en ICMNSZ / UNAM.">
+  <meta name="keywords" content="obesidad, genómica, metabolómica, ómicas, bioinformática, salud de precisión, ICMNSZ, UNAM">
 
   <style>
     :root {
@@ -15,7 +15,6 @@
       --blue: #2f6078;
       --cyan: #2fbfa3;
       --pink: #c12a86;
-      --yellow: #f3d21b;
       --light: #f7f9fb;
       --text: #1e2933;
       --muted: #607080;
@@ -55,7 +54,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(255, 255, 255, 0.94);
+      background: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
     }
@@ -89,6 +88,14 @@
       line-height: 1.15;
     }
 
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
     nav {
       display: flex;
       gap: 18px;
@@ -100,6 +107,32 @@
       color: var(--navy);
       font-size: 0.88rem;
       font-weight: 800;
+    }
+
+    .language-switch {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 4px;
+      background: var(--white);
+    }
+
+    .language-switch button {
+      border: none;
+      background: transparent;
+      color: var(--navy);
+      font-weight: 900;
+      font-size: 0.78rem;
+      border-radius: 999px;
+      padding: 7px 10px;
+      cursor: pointer;
+    }
+
+    .language-switch button.active {
+      background: var(--navy);
+      color: var(--white);
     }
 
     .hero {
@@ -409,7 +442,7 @@
       text-decoration: underline;
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 960px) {
       .hero-wrap,
       .grid.cols-3,
       .grid.cols-2,
@@ -420,6 +453,10 @@
       .nav {
         align-items: flex-start;
         flex-direction: column;
+      }
+
+      .nav-right {
+        justify-content: flex-start;
       }
 
       nav {
@@ -476,17 +513,24 @@
     <div class="nav">
       <a class="brand" href="#top">
         <img src="assets/logo.png" alt="Unidad de Investigación en Obesidad logo">
-        <span>Unidad de Investigación<br>en Obesidad</span>
+        <span data-i18n="brand">Unidad de Investigación<br>en Obesidad</span>
       </a>
 
-      <nav>
-        <a href="#about">About</a>
-        <a href="#research">Research</a>
-        <a href="#members">Members</a>
-        <a href="#publications">Publications</a>
-        <a href="#scripts">Scripts</a>
-        <a href="#contact">Contact</a>
-      </nav>
+      <div class="nav-right">
+        <nav>
+          <a href="#about" data-i18n="nav_about">Acerca de</a>
+          <a href="#research" data-i18n="nav_research">Investigación</a>
+          <a href="#members" data-i18n="nav_members">Miembros</a>
+          <a href="#publications" data-i18n="nav_publications">Publicaciones</a>
+          <a href="#scripts" data-i18n="nav_scripts">Recursos</a>
+          <a href="#contact" data-i18n="nav_contact">Contacto</a>
+        </nav>
+
+        <div class="language-switch" aria-label="Language selector">
+          <button id="btn-es" class="active" type="button" onclick="setLanguage('es')">ES</button>
+          <button id="btn-en" type="button" onclick="setLanguage('en')">EN</button>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -498,16 +542,18 @@
 
       <div>
         <div class="eyebrow">ICMNSZ / UNAM</div>
-        <h1>Unidad de Investigación en Obesidad</h1>
-        <div class="subtitle">Genomics and metabolomics research for obesity, metabolism and precision health.</div>
-        <p>
-          We study the molecular complexity of obesity and metabolic disease through genomics,
-          metabolomics, bioinformatics and reproducible biomedical data science.
+        <h1 data-i18n="hero_title">Unidad de Investigación en Obesidad</h1>
+        <div class="subtitle" data-i18n="hero_subtitle">
+          Investigación en genómica y metabolómica aplicada a obesidad, metabolismo y salud de precisión.
+        </div>
+        <p data-i18n="hero_text">
+          Estudiamos la complejidad molecular de la obesidad y las enfermedades metabólicas mediante genómica,
+          metabolómica, bioinformática y ciencia de datos biomédica reproducible.
         </p>
 
         <div class="buttons">
-          <a class="btn primary" href="#research">Explore research areas</a>
-          <a class="btn secondary" href="https://github.com/uiounam" target="_blank" rel="noopener">GitHub organization</a>
+          <a class="btn primary" href="#research" data-i18n="hero_btn_research">Explorar líneas de investigación</a>
+          <a class="btn secondary" href="https://github.com/uiounam" target="_blank" rel="noopener" data-i18n="hero_btn_github">Organización en GitHub</a>
         </div>
       </div>
     </div>
@@ -516,36 +562,39 @@
   <main>
     <section id="about">
       <div class="container">
-        <div class="section-kicker">About the lab</div>
-        <h2 class="section-title">A translational omics laboratory focused on obesity and metabolic health.</h2>
-        <p class="section-intro">
-          The Unidad de Investigación en Obesidad integrates clinical, molecular and computational approaches
-          to investigate obesity, metabolic dysfunction and response to therapeutic interventions.
-          At this stage, the laboratory focuses on genomics and metabolomics as core analytical platforms.
+        <div class="section-kicker" data-i18n="about_kicker">Acerca del laboratorio</div>
+        <h2 class="section-title" data-i18n="about_title">
+          Un laboratorio académico y traslacional enfocado en obesidad y salud metabólica.
+        </h2>
+        <p class="section-intro" data-i18n="about_intro">
+          La Unidad de Investigación en Obesidad integra aproximaciones clínicas, moleculares y computacionales
+          para estudiar los mecanismos biológicos asociados con obesidad, disfunción metabólica y respuesta a
+          intervenciones terapéuticas. En esta etapa, el laboratorio se enfoca en genómica y metabolómica como
+          plataformas analíticas centrales.
         </p>
 
         <div class="grid cols-3">
           <div class="card">
-            <h3>Genomics</h3>
-            <p>
-              We analyze genetic variation and gene-level information to explore biological mechanisms
-              associated with obesity and metabolic disease.
+            <h3 data-i18n="about_card1_title">Genómica</h3>
+            <p data-i18n="about_card1_text">
+              Analizamos variación genética e información a nivel génico para explorar mecanismos biológicos
+              asociados con obesidad y enfermedades metabólicas.
             </p>
           </div>
 
           <div class="card">
-            <h3>Metabolomics</h3>
-            <p>
-              We identify metabolic signatures linked to obesity, metabolic health, disease progression
-              and response to clinical or nutritional interventions.
+            <h3 data-i18n="about_card2_title">Metabolómica</h3>
+            <p data-i18n="about_card2_text">
+              Identificamos firmas metabólicas relacionadas con obesidad, salud metabólica, progresión de enfermedad
+              y respuesta a intervenciones clínicas o nutricionales.
             </p>
           </div>
 
           <div class="card">
-            <h3>Reproducible research</h3>
-            <p>
-              We develop documented computational workflows, scripts and analysis templates to promote
-              transparency, reuse and responsible biomedical data science.
+            <h3 data-i18n="about_card3_title">Investigación reproducible</h3>
+            <p data-i18n="about_card3_text">
+              Desarrollamos flujos de trabajo computacionales, scripts y plantillas de análisis documentadas para
+              promover transparencia, reutilización y ciencia de datos biomédica responsable.
             </p>
           </div>
         </div>
@@ -554,62 +603,62 @@
 
     <section class="light" id="research">
       <div class="container">
-        <div class="section-kicker">Research areas</div>
-        <h2 class="section-title">Core scientific lines</h2>
-        <p class="section-intro">
-          Our current work is centered on genomics, metabolomics, obesity, metabolism and precision health.
+        <div class="section-kicker" data-i18n="research_kicker">Líneas de investigación</div>
+        <h2 class="section-title" data-i18n="research_title">Áreas científicas centrales</h2>
+        <p class="section-intro" data-i18n="research_intro">
+          Nuestro trabajo actual se centra en genómica, metabolómica, obesidad, metabolismo y salud de precisión.
         </p>
 
         <div class="grid cols-2">
           <div class="card">
-            <h3>Genomics of obesity and metabolic disease</h3>
-            <p>
-              Analysis of genetic variation, gene-level signals and genotype-phenotype relationships
-              to better understand obesity-related traits and metabolic risk.
+            <h3 data-i18n="research_card1_title">Genómica de la obesidad y enfermedad metabólica</h3>
+            <p data-i18n="research_card1_text">
+              Análisis de variación genética, señales a nivel génico y relaciones genotipo-fenotipo para comprender
+              rasgos asociados con obesidad y riesgo metabólico.
             </p>
             <div class="tag-row">
-              <span class="tag">genomics</span>
-              <span class="tag">variants</span>
-              <span class="tag">gene-level analysis</span>
+              <span class="tag">genómica</span>
+              <span class="tag">variantes</span>
+              <span class="tag">análisis génico</span>
             </div>
           </div>
 
           <div class="card">
-            <h3>Metabolomics and metabolic phenotyping</h3>
-            <p>
-              Characterization of metabolites and metabolic pathways associated with obesity,
-              insulin resistance, metabolic dysfunction and intervention response.
+            <h3 data-i18n="research_card2_title">Metabolómica y fenotipado metabólico</h3>
+            <p data-i18n="research_card2_text">
+              Caracterización de metabolitos y rutas metabólicas asociadas con obesidad, resistencia a la insulina,
+              disfunción metabólica y respuesta a intervenciones.
             </p>
             <div class="tag-row">
-              <span class="tag">metabolomics</span>
-              <span class="tag">metabolic signatures</span>
-              <span class="tag">biomarkers</span>
+              <span class="tag">metabolómica</span>
+              <span class="tag">firmas metabólicas</span>
+              <span class="tag">biomarcadores</span>
             </div>
           </div>
 
           <div class="card">
-            <h3>Bioinformatics and biomedical data science</h3>
-            <p>
-              Development of computational strategies for omics analysis, statistical modeling,
-              visualization and reproducible biomedical research.
+            <h3 data-i18n="research_card3_title">Bioinformática y ciencia de datos biomédica</h3>
+            <p data-i18n="research_card3_text">
+              Desarrollo de estrategias computacionales para análisis ómico, modelado estadístico, visualización
+              e investigación biomédica reproducible.
             </p>
             <div class="tag-row">
-              <span class="tag">bioinformatics</span>
-              <span class="tag">statistics</span>
-              <span class="tag">visualization</span>
+              <span class="tag">bioinformática</span>
+              <span class="tag">estadística</span>
+              <span class="tag">visualización</span>
             </div>
           </div>
 
           <div class="card">
-            <h3>Precision health in obesity</h3>
-            <p>
-              Integration of molecular and clinical information to support biomarker discovery,
-              patient stratification and personalized intervention strategies.
+            <h3 data-i18n="research_card4_title">Salud de precisión en obesidad</h3>
+            <p data-i18n="research_card4_text">
+              Integración de información molecular y clínica para apoyar el descubrimiento de biomarcadores,
+              la estratificación de pacientes y el diseño de estrategias de intervención personalizadas.
             </p>
             <div class="tag-row">
-              <span class="tag">precision health</span>
-              <span class="tag">clinical translation</span>
-              <span class="tag">obesity</span>
+              <span class="tag">salud de precisión</span>
+              <span class="tag">traslación clínica</span>
+              <span class="tag">obesidad</span>
             </div>
           </div>
         </div>
@@ -618,11 +667,11 @@
 
     <section id="members">
       <div class="container">
-        <div class="section-kicker">Members</div>
-        <h2 class="section-title">Lab members</h2>
-        <p class="section-intro">
-          Our laboratory brings together expertise in obesity research, genomics, metabolomics,
-          bioinformatics and translational biomedical science.
+        <div class="section-kicker" data-i18n="members_kicker">Miembros</div>
+        <h2 class="section-title" data-i18n="members_title">Integrantes del laboratorio</h2>
+        <p class="section-intro" data-i18n="members_intro">
+          El laboratorio reúne experiencia en investigación en obesidad, genómica, metabolómica, bioinformática
+          y ciencia biomédica traslacional.
         </p>
 
         <div class="grid cols-2">
@@ -630,36 +679,36 @@
             <img class="member-photo" src="assets/members/ruth.jpg" alt="Dra. Ruth Gutiérrez Aguilar">
             <div>
               <h3>Dra. Ruth Gutiérrez Aguilar</h3>
-              <div class="role">Laboratory Lead / Principal Investigator</div>
-              <p>
-                Principal investigator of the Unidad de Investigación en Obesidad. Her research focuses on
-                obesity, metabolic disease, gene expression, genomics, metabolites and clinical-translational
-                approaches to understand metabolic health.
+              <div class="role" data-i18n="ruth_role">Líder del laboratorio / Investigadora principal</div>
+              <p data-i18n="ruth_description">
+                Investigadora principal de la Unidad de Investigación en Obesidad. Su trabajo se enfoca en obesidad,
+                enfermedad metabólica, expresión génica, genómica, metabolitos y aproximaciones clínico-traslacionales
+                para comprender la salud metabólica.
               </p>
               <div class="tag-row">
                 <a class="tag" href="https://scholar.google.com/citations?user=ctMDw4IAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
-                <span class="tag">Obesity</span>
-                <span class="tag">Genomics</span>
-                <span class="tag">Metabolism</span>
+                <span class="tag">obesidad</span>
+                <span class="tag">genómica</span>
+                <span class="tag">metabolismo</span>
               </div>
             </div>
           </div>
 
           <div class="card member">
-            <img class="member-photo" src="assets/members/Juan%20Jose.png" alt="Dr. Juan José Oropeza-Valdez">
+            <img class="member-photo" src="assets/members/Juan-Jose.png" alt="Dr. Juan José Oropeza-Valdez">
             <div>
               <h3>Dr. Juan José Oropeza-Valdez</h3>
-              <div class="role">Associate Researcher</div>
-              <p>
-                Associate researcher focused on metabolomics, bioinformatics, systems biology,
-                omics data integration and reproducible computational workflows for obesity
-                and metabolic research.
+              <div class="role" data-i18n="juan_role">Investigador asociado</div>
+              <p data-i18n="juan_description">
+                Investigador asociado enfocado en metabolómica, bioinformática, biología de sistemas, integración de
+                datos ómicos y desarrollo de flujos de trabajo computacionales reproducibles para investigación en
+                obesidad y metabolismo.
               </p>
               <div class="tag-row">
-                <span class="tag">Metabolomics</span>
-                <span class="tag">Bioinformatics</span>
-                <span class="tag">Systems biology</span>
-                <span class="tag">Reproducible research</span>
+                <span class="tag">metabolómica</span>
+                <span class="tag">bioinformática</span>
+                <span class="tag">biología de sistemas</span>
+                <span class="tag">investigación reproducible</span>
               </div>
             </div>
           </div>
@@ -667,11 +716,11 @@
           <div class="card member">
             <div class="member-placeholder">+</div>
             <div>
-              <h3>Students and trainees</h3>
-              <div class="role">Undergraduate, MSc, PhD and visiting students</div>
-              <p>
-                This section will include current students, thesis projects, visiting researchers
-                and trainees contributing to genomics and metabolomics projects in the laboratory.
+              <h3 data-i18n="students_title">Estudiantes y personas en formación</h3>
+              <div class="role" data-i18n="students_role">Licenciatura, maestría, doctorado y estancias académicas</div>
+              <p data-i18n="students_description">
+                Esta sección incluirá estudiantes, proyectos de tesis, investigadores visitantes y personas en formación
+                que contribuyan a proyectos de genómica y metabolómica del laboratorio.
               </p>
             </div>
           </div>
@@ -679,11 +728,11 @@
           <div class="card member">
             <div class="member-placeholder">∞</div>
             <div>
-              <h3>Collaborators</h3>
-              <div class="role">National and international collaborations</div>
-              <p>
-                We collaborate with clinical, experimental and computational groups interested
-                in obesity, metabolism, genomics, metabolomics and precision health.
+              <h3 data-i18n="collaborators_title">Colaboradores</h3>
+              <div class="role" data-i18n="collaborators_role">Colaboraciones nacionales e internacionales</div>
+              <p data-i18n="collaborators_description">
+                Colaboramos con grupos clínicos, experimentales y computacionales interesados en obesidad, metabolismo,
+                genómica, metabolómica y salud de precisión.
               </p>
             </div>
           </div>
@@ -693,11 +742,11 @@
 
     <section class="light" id="publications">
       <div class="container">
-        <div class="section-kicker">Publications</div>
-        <h2 class="section-title">Selected publications</h2>
-        <p class="section-intro">
-          Representative publications from the laboratory and its members. This section will be updated
-          with manuscripts, datasets, computational resources and code repositories as they become available.
+        <div class="section-kicker" data-i18n="publications_kicker">Publicaciones</div>
+        <h2 class="section-title" data-i18n="publications_title">Publicaciones seleccionadas</h2>
+        <p class="section-intro" data-i18n="publications_intro">
+          Publicaciones representativas del laboratorio y sus integrantes. Esta sección será actualizada con manuscritos,
+          conjuntos de datos, recursos computacionales y repositorios de código conforme estén disponibles.
         </p>
 
         <div class="publication">
@@ -725,51 +774,50 @@
         </div>
 
         <div class="buttons">
-          <a class="btn primary" href="https://scholar.google.com/citations?user=ctMDw4IAAAAJ&hl=en" target="_blank" rel="noopener">View Google Scholar</a>
-          <a class="btn secondary" href="https://github.com/uiounam" target="_blank" rel="noopener">View GitHub</a>
+          <a class="btn primary" href="https://scholar.google.com/citations?user=ctMDw4IAAAAJ&hl=en" target="_blank" rel="noopener" data-i18n="publications_btn_scholar">Ver Google Scholar</a>
+          <a class="btn secondary" href="https://github.com/uiounam" target="_blank" rel="noopener" data-i18n="publications_btn_github">Ver GitHub</a>
         </div>
       </div>
     </section>
 
     <section id="scripts">
       <div class="container">
-        <div class="section-kicker">Scripts and resources</div>
-        <h2 class="section-title">Genomics and metabolomics resources</h2>
-        <p class="section-intro">
-          Our computational resources are currently being developed and documented.
-          At this stage, the laboratory focuses on genomics and metabolomics workflows.
-          Public releases will include documentation, examples, citation information and
-          reproducible environments whenever possible.
+        <div class="section-kicker" data-i18n="scripts_kicker">Recursos computacionales</div>
+        <h2 class="section-title" data-i18n="scripts_title">Recursos de genómica y metabolómica</h2>
+        <p class="section-intro" data-i18n="scripts_intro">
+          Nuestros recursos computacionales se encuentran actualmente en desarrollo y documentación. En esta etapa,
+          el laboratorio se enfoca en flujos de trabajo de genómica y metabolómica. Las versiones públicas incluirán
+          documentación, ejemplos, información de citación y ambientes reproducibles cuando sea posible.
         </p>
 
         <div class="grid cols-2">
           <div class="card repo-card">
-            <span class="status">In development</span>
+            <span class="status" data-i18n="status_development">En desarrollo</span>
             <div class="repo-name">genomics-workflows</div>
-            <p>
-              Workflows for genetic variation analysis, gene-level summaries,
-              variant annotation and genotype-phenotype association studies.
+            <p data-i18n="genomics_repo_text">
+              Flujos de trabajo para análisis de variación genética, resúmenes a nivel génico, anotación de variantes
+              y estudios de asociación genotipo-fenotipo.
             </p>
             <div class="tag-row">
-              <span class="tag">genomics</span>
-              <span class="tag">variants</span>
-              <span class="tag">annotation</span>
-              <span class="tag">association studies</span>
+              <span class="tag">genómica</span>
+              <span class="tag">variantes</span>
+              <span class="tag">anotación</span>
+              <span class="tag">asociación</span>
             </div>
           </div>
 
           <div class="card repo-card">
-            <span class="status">In development</span>
+            <span class="status" data-i18n="status_development_2">En desarrollo</span>
             <div class="repo-name">metabolomics-workflows</div>
-            <p>
-              Workflows for metabolomics data processing, normalization,
-              statistical analysis, biomarker exploration and visualization.
+            <p data-i18n="metabolomics_repo_text">
+              Flujos de trabajo para procesamiento de datos metabolómicos, normalización, análisis estadístico,
+              exploración de biomarcadores y visualización.
             </p>
             <div class="tag-row">
-              <span class="tag">metabolomics</span>
-              <span class="tag">biomarkers</span>
-              <span class="tag">statistics</span>
-              <span class="tag">visualization</span>
+              <span class="tag">metabolómica</span>
+              <span class="tag">biomarcadores</span>
+              <span class="tag">estadística</span>
+              <span class="tag">visualización</span>
             </div>
           </div>
         </div>
@@ -778,31 +826,32 @@
 
     <section class="light" id="principles">
       <div class="container">
-        <div class="section-kicker">Research principles</div>
-        <h2 class="section-title">Responsible and reproducible biomedical data science</h2>
-        <p class="section-intro">
-          We promote transparent computational workflows while protecting sensitive clinical and human-derived data.
+        <div class="section-kicker" data-i18n="principles_kicker">Principios de investigación</div>
+        <h2 class="section-title" data-i18n="principles_title">Ciencia de datos biomédica responsable y reproducible</h2>
+        <p class="section-intro" data-i18n="principles_intro">
+          Promovemos flujos de trabajo computacionales transparentes, manteniendo la protección de datos clínicos
+          y humanos sensibles.
         </p>
 
         <div class="grid cols-3">
           <div class="card">
-            <h3>Reproducibility</h3>
-            <p>
-              Clear documentation, version control, workflow organization and reusable analysis templates.
+            <h3 data-i18n="principles_card1_title">Reproducibilidad</h3>
+            <p data-i18n="principles_card1_text">
+              Documentación clara, control de versiones, organización de flujos de trabajo y plantillas de análisis reutilizables.
             </p>
           </div>
 
           <div class="card">
-            <h3>Responsible data use</h3>
-            <p>
-              Restricted clinical or human-derived datasets are not publicly shared unless appropriate approvals allow it.
+            <h3 data-i18n="principles_card2_title">Uso responsable de datos</h3>
+            <p data-i18n="principles_card2_text">
+              Los datos clínicos o derivados de personas no se comparten públicamente salvo que las aprobaciones correspondientes lo permitan.
             </p>
           </div>
 
           <div class="card">
-            <h3>Collaboration</h3>
-            <p>
-              We welcome academic collaborations in genomics, metabolomics, obesity, metabolism and precision health.
+            <h3 data-i18n="principles_card3_title">Colaboración académica</h3>
+            <p data-i18n="principles_card3_text">
+              Estamos abiertos a colaboraciones académicas en genómica, metabolómica, obesidad, metabolismo y salud de precisión.
             </p>
           </div>
         </div>
@@ -813,8 +862,8 @@
       <div class="container">
         <div class="contact-box">
           <div>
-            <h2>Contact and collaboration</h2>
-            <p>
+            <h2 data-i18n="contact_title">Contacto y colaboración</h2>
+            <p data-i18n="contact_text">
               Unidad de Investigación en Obesidad<br>
               Instituto Nacional de Ciencias Médicas y Nutrición Salvador Zubirán / UNAM
             </p>
@@ -832,12 +881,193 @@
   </main>
 
   <footer>
-    © <span id="year"></span> Unidad de Investigación en Obesidad · ICMNSZ / UNAM ·
+    © <span id="year"></span> <span data-i18n="footer_text">Unidad de Investigación en Obesidad · ICMNSZ / UNAM</span> ·
     <a href="https://github.com/uiounam" target="_blank" rel="noopener">GitHub</a>
   </footer>
 
   <script>
+    const translations = {
+      es: {
+        brand: "Unidad de Investigación<br>en Obesidad",
+        nav_about: "Acerca de",
+        nav_research: "Investigación",
+        nav_members: "Miembros",
+        nav_publications: "Publicaciones",
+        nav_scripts: "Recursos",
+        nav_contact: "Contacto",
+
+        hero_title: "Unidad de Investigación en Obesidad",
+        hero_subtitle: "Investigación en genómica y metabolómica aplicada a obesidad, metabolismo y salud de precisión.",
+        hero_text: "Estudiamos la complejidad molecular de la obesidad y las enfermedades metabólicas mediante genómica, metabolómica, bioinformática y ciencia de datos biomédica reproducible.",
+        hero_btn_research: "Explorar líneas de investigación",
+        hero_btn_github: "Organización en GitHub",
+
+        about_kicker: "Acerca del laboratorio",
+        about_title: "Un laboratorio académico y traslacional enfocado en obesidad y salud metabólica.",
+        about_intro: "La Unidad de Investigación en Obesidad integra aproximaciones clínicas, moleculares y computacionales para estudiar los mecanismos biológicos asociados con obesidad, disfunción metabólica y respuesta a intervenciones terapéuticas. En esta etapa, el laboratorio se enfoca en genómica y metabolómica como plataformas analíticas centrales.",
+        about_card1_title: "Genómica",
+        about_card1_text: "Analizamos variación genética e información a nivel génico para explorar mecanismos biológicos asociados con obesidad y enfermedades metabólicas.",
+        about_card2_title: "Metabolómica",
+        about_card2_text: "Identificamos firmas metabólicas relacionadas con obesidad, salud metabólica, progresión de enfermedad y respuesta a intervenciones clínicas o nutricionales.",
+        about_card3_title: "Investigación reproducible",
+        about_card3_text: "Desarrollamos flujos de trabajo computacionales, scripts y plantillas de análisis documentadas para promover transparencia, reutilización y ciencia de datos biomédica responsable.",
+
+        research_kicker: "Líneas de investigación",
+        research_title: "Áreas científicas centrales",
+        research_intro: "Nuestro trabajo actual se centra en genómica, metabolómica, obesidad, metabolismo y salud de precisión.",
+        research_card1_title: "Genómica de la obesidad y enfermedad metabólica",
+        research_card1_text: "Análisis de variación genética, señales a nivel génico y relaciones genotipo-fenotipo para comprender rasgos asociados con obesidad y riesgo metabólico.",
+        research_card2_title: "Metabolómica y fenotipado metabólico",
+        research_card2_text: "Caracterización de metabolitos y rutas metabólicas asociadas con obesidad, resistencia a la insulina, disfunción metabólica y respuesta a intervenciones.",
+        research_card3_title: "Bioinformática y ciencia de datos biomédica",
+        research_card3_text: "Desarrollo de estrategias computacionales para análisis ómico, modelado estadístico, visualización e investigación biomédica reproducible.",
+        research_card4_title: "Salud de precisión en obesidad",
+        research_card4_text: "Integración de información molecular y clínica para apoyar el descubrimiento de biomarcadores, la estratificación de pacientes y el diseño de estrategias de intervención personalizadas.",
+
+        members_kicker: "Miembros",
+        members_title: "Integrantes del laboratorio",
+        members_intro: "El laboratorio reúne experiencia en investigación en obesidad, genómica, metabolómica, bioinformática y ciencia biomédica traslacional.",
+        ruth_role: "Líder del laboratorio / Investigadora principal",
+        ruth_description: "Investigadora principal de la Unidad de Investigación en Obesidad. Su trabajo se enfoca en obesidad, enfermedad metabólica, expresión génica, genómica, metabolitos y aproximaciones clínico-traslacionales para comprender la salud metabólica.",
+        juan_role: "Investigador asociado",
+        juan_description: "Investigador asociado enfocado en metabolómica, bioinformática, biología de sistemas, integración de datos ómicos y desarrollo de flujos de trabajo computacionales reproducibles para investigación en obesidad y metabolismo.",
+        students_title: "Estudiantes y personas en formación",
+        students_role: "Licenciatura, maestría, doctorado y estancias académicas",
+        students_description: "Esta sección incluirá estudiantes, proyectos de tesis, investigadores visitantes y personas en formación que contribuyan a proyectos de genómica y metabolómica del laboratorio.",
+        collaborators_title: "Colaboradores",
+        collaborators_role: "Colaboraciones nacionales e internacionales",
+        collaborators_description: "Colaboramos con grupos clínicos, experimentales y computacionales interesados en obesidad, metabolismo, genómica, metabolómica y salud de precisión.",
+
+        publications_kicker: "Publicaciones",
+        publications_title: "Publicaciones seleccionadas",
+        publications_intro: "Publicaciones representativas del laboratorio y sus integrantes. Esta sección será actualizada con manuscritos, conjuntos de datos, recursos computacionales y repositorios de código conforme estén disponibles.",
+        publications_btn_scholar: "Ver Google Scholar",
+        publications_btn_github: "Ver GitHub",
+
+        scripts_kicker: "Recursos computacionales",
+        scripts_title: "Recursos de genómica y metabolómica",
+        scripts_intro: "Nuestros recursos computacionales se encuentran actualmente en desarrollo y documentación. En esta etapa, el laboratorio se enfoca en flujos de trabajo de genómica y metabolómica. Las versiones públicas incluirán documentación, ejemplos, información de citación y ambientes reproducibles cuando sea posible.",
+        status_development: "En desarrollo",
+        status_development_2: "En desarrollo",
+        genomics_repo_text: "Flujos de trabajo para análisis de variación genética, resúmenes a nivel génico, anotación de variantes y estudios de asociación genotipo-fenotipo.",
+        metabolomics_repo_text: "Flujos de trabajo para procesamiento de datos metabolómicos, normalización, análisis estadístico, exploración de biomarcadores y visualización.",
+
+        principles_kicker: "Principios de investigación",
+        principles_title: "Ciencia de datos biomédica responsable y reproducible",
+        principles_intro: "Promovemos flujos de trabajo computacionales transparentes, manteniendo la protección de datos clínicos y humanos sensibles.",
+        principles_card1_title: "Reproducibilidad",
+        principles_card1_text: "Documentación clara, control de versiones, organización de flujos de trabajo y plantillas de análisis reutilizables.",
+        principles_card2_title: "Uso responsable de datos",
+        principles_card2_text: "Los datos clínicos o derivados de personas no se comparten públicamente salvo que las aprobaciones correspondientes lo permitan.",
+        principles_card3_title: "Colaboración académica",
+        principles_card3_text: "Estamos abiertos a colaboraciones académicas en genómica, metabolómica, obesidad, metabolismo y salud de precisión.",
+
+        contact_title: "Contacto y colaboración",
+        contact_text: "Unidad de Investigación en Obesidad<br>Instituto Nacional de Ciencias Médicas y Nutrición Salvador Zubirán / UNAM",
+        footer_text: "Unidad de Investigación en Obesidad · ICMNSZ / UNAM"
+      },
+
+      en: {
+        brand: "Obesity Research<br>Unit",
+        nav_about: "About",
+        nav_research: "Research",
+        nav_members: "Members",
+        nav_publications: "Publications",
+        nav_scripts: "Resources",
+        nav_contact: "Contact",
+
+        hero_title: "Obesity Research Unit",
+        hero_subtitle: "Genomics and metabolomics research for obesity, metabolism and precision health.",
+        hero_text: "We study the molecular complexity of obesity and metabolic diseases through genomics, metabolomics, bioinformatics and reproducible biomedical data science.",
+        hero_btn_research: "Explore research areas",
+        hero_btn_github: "GitHub organization",
+
+        about_kicker: "About the laboratory",
+        about_title: "An academic and translational laboratory focused on obesity and metabolic health.",
+        about_intro: "The Obesity Research Unit integrates clinical, molecular and computational approaches to study biological mechanisms associated with obesity, metabolic dysfunction and response to therapeutic interventions. At this stage, the laboratory focuses on genomics and metabolomics as central analytical platforms.",
+        about_card1_title: "Genomics",
+        about_card1_text: "We analyze genetic variation and gene-level information to explore biological mechanisms associated with obesity and metabolic diseases.",
+        about_card2_title: "Metabolomics",
+        about_card2_text: "We identify metabolic signatures related to obesity, metabolic health, disease progression and response to clinical or nutritional interventions.",
+        about_card3_title: "Reproducible research",
+        about_card3_text: "We develop documented computational workflows, scripts and analysis templates to promote transparency, reuse and responsible biomedical data science.",
+
+        research_kicker: "Research areas",
+        research_title: "Core scientific areas",
+        research_intro: "Our current work focuses on genomics, metabolomics, obesity, metabolism and precision health.",
+        research_card1_title: "Genomics of obesity and metabolic disease",
+        research_card1_text: "Analysis of genetic variation, gene-level signals and genotype-phenotype relationships to better understand obesity-related traits and metabolic risk.",
+        research_card2_title: "Metabolomics and metabolic phenotyping",
+        research_card2_text: "Characterization of metabolites and metabolic pathways associated with obesity, insulin resistance, metabolic dysfunction and response to interventions.",
+        research_card3_title: "Bioinformatics and biomedical data science",
+        research_card3_text: "Development of computational strategies for omics analysis, statistical modeling, visualization and reproducible biomedical research.",
+        research_card4_title: "Precision health in obesity",
+        research_card4_text: "Integration of molecular and clinical information to support biomarker discovery, patient stratification and personalized intervention strategies.",
+
+        members_kicker: "Members",
+        members_title: "Laboratory members",
+        members_intro: "The laboratory brings together expertise in obesity research, genomics, metabolomics, bioinformatics and translational biomedical science.",
+        ruth_role: "Laboratory Lead / Principal Investigator",
+        ruth_description: "Principal investigator of the Obesity Research Unit. Her work focuses on obesity, metabolic disease, gene expression, genomics, metabolites and clinical-translational approaches to understand metabolic health.",
+        juan_role: "Associate Researcher",
+        juan_description: "Associate researcher focused on metabolomics, bioinformatics, systems biology, omics data integration and the development of reproducible computational workflows for obesity and metabolism research.",
+        students_title: "Students and trainees",
+        students_role: "Undergraduate, MSc, PhD and academic visitors",
+        students_description: "This section will include students, thesis projects, visiting researchers and trainees contributing to genomics and metabolomics projects in the laboratory.",
+        collaborators_title: "Collaborators",
+        collaborators_role: "National and international collaborations",
+        collaborators_description: "We collaborate with clinical, experimental and computational groups interested in obesity, metabolism, genomics, metabolomics and precision health.",
+
+        publications_kicker: "Publications",
+        publications_title: "Selected publications",
+        publications_intro: "Representative publications from the laboratory and its members. This section will be updated with manuscripts, datasets, computational resources and code repositories as they become available.",
+        publications_btn_scholar: "View Google Scholar",
+        publications_btn_github: "View GitHub",
+
+        scripts_kicker: "Computational resources",
+        scripts_title: "Genomics and metabolomics resources",
+        scripts_intro: "Our computational resources are currently being developed and documented. At this stage, the laboratory focuses on genomics and metabolomics workflows. Public releases will include documentation, examples, citation information and reproducible environments whenever possible.",
+        status_development: "In development",
+        status_development_2: "In development",
+        genomics_repo_text: "Workflows for genetic variation analysis, gene-level summaries, variant annotation and genotype-phenotype association studies.",
+        metabolomics_repo_text: "Workflows for metabolomics data processing, normalization, statistical analysis, biomarker exploration and visualization.",
+
+        principles_kicker: "Research principles",
+        principles_title: "Responsible and reproducible biomedical data science",
+        principles_intro: "We promote transparent computational workflows while protecting sensitive clinical and human-derived data.",
+        principles_card1_title: "Reproducibility",
+        principles_card1_text: "Clear documentation, version control, workflow organization and reusable analysis templates.",
+        principles_card2_title: "Responsible data use",
+        principles_card2_text: "Clinical or human-derived data are not publicly shared unless the corresponding approvals allow it.",
+        principles_card3_title: "Academic collaboration",
+        principles_card3_text: "We welcome academic collaborations in genomics, metabolomics, obesity, metabolism and precision health.",
+
+        contact_title: "Contact and collaboration",
+        contact_text: "Obesity Research Unit<br>Instituto Nacional de Ciencias Médicas y Nutrición Salvador Zubirán / UNAM",
+        footer_text: "Obesity Research Unit · ICMNSZ / UNAM"
+      }
+    };
+
+    function setLanguage(language) {
+      document.documentElement.lang = language;
+
+      document.querySelectorAll("[data-i18n]").forEach((element) => {
+        const key = element.getAttribute("data-i18n");
+        if (translations[language][key]) {
+          element.innerHTML = translations[language][key];
+        }
+      });
+
+      document.getElementById("btn-es").classList.toggle("active", language === "es");
+      document.getElementById("btn-en").classList.toggle("active", language === "en");
+
+      localStorage.setItem("preferredLanguage", language);
+    }
+
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    const savedLanguage = localStorage.getItem("preferredLanguage") || "es";
+    setLanguage(savedLanguage);
   </script>
 </body>
 </html>
