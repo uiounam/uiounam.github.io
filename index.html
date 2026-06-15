@@ -53,6 +53,39 @@
 
     ::selection { background: var(--coral); color: #fff; }
 
+
+    /* ---------- Animated molecular background ---------- */
+    #network-bg {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.58;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 18% 18%, rgba(31, 158, 143, 0.13), transparent 28%),
+        radial-gradient(circle at 82% 28%, rgba(224, 69, 123, 0.10), transparent 30%),
+        radial-gradient(circle at 50% 88%, rgba(217, 144, 34, 0.08), transparent 34%);
+    }
+
+    header,
+    main,
+    footer {
+      position: relative;
+    }
+
+    header { z-index: 100; }
+    main, footer { z-index: 1; }
+
     /* ---------- Header ---------- */
     header {
       position: sticky;
@@ -528,7 +561,13 @@
     .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .reveal.in { opacity: 1; transform: none; }
 
+
+    @media (max-width: 760px) {
+      #network-bg { opacity: 0.28; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
+      #network-bg { display: none; }
       .hero-logo img { animation: none; opacity: 0.96; }
       .reveal { opacity: 1; transform: none; transition: none; }
       html { scroll-behavior: auto; }
@@ -582,6 +621,7 @@
 </head>
 
 <body id="top">
+  <canvas id="network-bg" aria-hidden="true"></canvas>
   <header>
     <div class="nav">
       <a class="brand" href="#top" aria-label="Inicio">
@@ -960,6 +1000,143 @@
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
     }, { threshold: 0.12 });
     document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+
+    // Interactive molecular / omics-style background
+    const networkCanvas = document.getElementById("network-bg");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    function startNetworkBackground() {
+      if (!networkCanvas || reducedMotion.matches) return;
+
+      const ctx = networkCanvas.getContext("2d");
+      let width = 0;
+      let height = 0;
+      let dpr = 1;
+      let particles = [];
+      let animationFrame;
+
+      const mouse = { x: 0, y: 0, active: false };
+      const palette = [
+        "rgba(31, 158, 143, 0.72)",
+        "rgba(224, 69, 123, 0.62)",
+        "rgba(217, 144, 34, 0.62)",
+        "rgba(14, 34, 51, 0.45)"
+      ];
+
+      function isSmallScreen() {
+        return window.matchMedia("(max-width: 760px)").matches;
+      }
+
+      function createParticles() {
+        const small = isSmallScreen();
+        const targetDensity = small ? 24000 : 16500;
+        const maxParticles = small ? 34 : 82;
+        const count = Math.min(maxParticles, Math.max(24, Math.floor((width * height) / targetDensity)));
+
+        particles = Array.from({ length: count }, (_, i) => ({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * (small ? 0.18 : 0.28),
+          vy: (Math.random() - 0.5) * (small ? 0.18 : 0.28),
+          radius: Math.random() * 1.6 + 1.1,
+          color: palette[i % palette.length]
+        }));
+      }
+
+      function resizeCanvas() {
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        width = window.innerWidth;
+        height = window.innerHeight;
+        networkCanvas.width = Math.floor(width * dpr);
+        networkCanvas.height = Math.floor(height * dpr);
+        networkCanvas.style.width = `${width}px`;
+        networkCanvas.style.height = `${height}px`;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        createParticles();
+      }
+
+      function drawLine(a, b, maxDistance, alphaBoost = 1) {
+        const dx = a.x - b.x;
+        const dy = a.y - b.y;
+        const distance = Math.hypot(dx, dy);
+        if (distance > maxDistance) return;
+
+        const alpha = (1 - distance / maxDistance) * 0.22 * alphaBoost;
+        ctx.strokeStyle = `rgba(31, 58, 79, ${alpha})`;
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
+        ctx.stroke();
+      }
+
+      function updateParticle(p) {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < -20) p.x = width + 20;
+        if (p.x > width + 20) p.x = -20;
+        if (p.y < -20) p.y = height + 20;
+        if (p.y > height + 20) p.y = -20;
+
+        if (mouse.active && !isSmallScreen()) {
+          const dx = mouse.x - p.x;
+          const dy = mouse.y - p.y;
+          const distance = Math.hypot(dx, dy);
+          if (distance < 170 && distance > 1) {
+            const force = (1 - distance / 170) * 0.018;
+            p.x -= dx * force;
+            p.y -= dy * force;
+          }
+        }
+      }
+
+      function render() {
+        ctx.clearRect(0, 0, width, height);
+
+        const small = isSmallScreen();
+        const linkDistance = small ? 92 : 132;
+
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+          updateParticle(p);
+
+          for (let j = i + 1; j < particles.length; j++) {
+            drawLine(p, particles[j], linkDistance);
+          }
+
+          if (mouse.active && !small) {
+            drawLine(p, mouse, 190, 1.4);
+          }
+
+          ctx.fillStyle = p.color;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        animationFrame = requestAnimationFrame(render);
+      }
+
+      window.addEventListener("resize", resizeCanvas, { passive: true });
+      window.addEventListener("pointermove", (event) => {
+        mouse.x = event.clientX;
+        mouse.y = event.clientY;
+        mouse.active = true;
+      }, { passive: true });
+      window.addEventListener("pointerleave", () => { mouse.active = false; }, { passive: true });
+
+      reducedMotion.addEventListener?.("change", () => {
+        if (reducedMotion.matches) cancelAnimationFrame(animationFrame);
+        else render();
+      });
+
+      resizeCanvas();
+      render();
+    }
+
+    startNetworkBackground();
   </script>
 </body>
 </html>
