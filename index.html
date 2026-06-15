@@ -99,7 +99,7 @@
     .nav {
       max-width: var(--maxw);
       margin: 0 auto;
-      padding: 14px 24px;
+      padding: 18px 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -122,22 +122,26 @@
     .institution-logos {
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 14px;
-      flex: 1;
-      min-width: 180px;
+      justify-content: flex-start;
+      gap: 24px;
+      flex: 0 1 auto;
+      min-width: 500px;
     }
     .institution-logo-link {
       display: inline-flex;
       align-items: center;
     }
     .institution-logo {
-      height: 38px;
+      height: 62px;
       width: auto;
-      max-width: 132px;
+      max-width: 180px;
       object-fit: contain;
       display: block;
-      filter: saturate(0.96) contrast(1.02);
+      filter: saturate(0.98) contrast(1.04);
+    }
+    .lab-header-logo {
+      height: 78px;
+      max-width: 240px;
     }
 
     .nav-right {
@@ -658,6 +662,20 @@
       html { scroll-behavior: auto; }
     }
 
+
+    @media (max-width: 1080px) {
+      .nav { flex-wrap: wrap; }
+      .institution-logos {
+        flex-basis: 100%;
+        min-width: 0;
+        justify-content: center;
+      }
+      .nav-right {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
     /* ---------- Responsive ---------- */
     @media (max-width: 920px) {
       .hero { grid-template-columns: 1fr; padding-top: 64px; gap: 36px; }
@@ -668,14 +686,16 @@
     }
 
     @media (max-width: 760px) {
-      .nav { gap: 12px; }
+      .nav { gap: 12px; flex-wrap: wrap; }
       .institution-logos {
         order: 3;
         flex-basis: 100%;
         justify-content: flex-start;
         gap: 12px;
+        min-width: 0;
       }
-      .institution-logo { height: 32px; max-width: 112px; }
+      .institution-logo { height: 48px; max-width: 140px; }
+      .lab-header-logo { height: 60px; max-width: 180px; }
       .menu-toggle {
         display: grid;
         place-items: center;
@@ -703,7 +723,8 @@
 
     @media (max-width: 540px) {
       .brand-logo { height: 34px; }
-      .institution-logo { height: 28px; max-width: 96px; }
+      .institution-logo { height: 42px; max-width: 112px; }
+      .lab-header-logo { height: 52px; max-width: 150px; }
       .member { grid-template-columns: 1fr; }
       .research-item { grid-template-columns: 1fr; gap: 8px; }
       .pub { grid-template-columns: 1fr; gap: 10px; }
@@ -720,17 +741,16 @@
   <canvas id="network-bg" aria-hidden="true"></canvas>
   <header>
     <div class="nav">
-      <a class="brand" href="#top" aria-label="Inicio">
-        <img class="brand-logo" src="assets/logo.png" alt="Unidad de Investigación en Obesidad · ICMNSZ / UNAM">
-      </a>
-
-      <!-- Logos institucionales: coloca estos archivos en assets/ con estos mismos nombres -->
+      <!-- Logos institucionales: ordenados UNAM · Hospital · Laboratorio -->
       <div class="institution-logos" aria-label="Instituciones participantes">
+        <a class="institution-logo-link" href="https://www.unam.mx/" target="_blank" rel="noopener" aria-label="Universidad Nacional Autónoma de México">
+          <img class="institution-logo" src="assets/logo-unam.jpg" alt="Universidad Nacional Autónoma de México">
+        </a>
         <a class="institution-logo-link" href="https://www.incmnsz.mx/" target="_blank" rel="noopener" aria-label="Instituto Nacional de Ciencias Médicas y Nutrición Salvador Zubirán">
           <img class="institution-logo" src="assets/logo-hospital.jpg" alt="Instituto Nacional de Ciencias Médicas y Nutrición Salvador Zubirán">
         </a>
-        <a class="institution-logo-link" href="https://www.unam.mx/" target="_blank" rel="noopener" aria-label="Universidad Nacional Autónoma de México">
-          <img class="institution-logo" src="assets/logo-unam.jpg" alt="Universidad Nacional Autónoma de México">
+        <a class="institution-logo-link" href="#top" aria-label="Inicio · Unidad de Investigación en Obesidad">
+          <img class="institution-logo lab-header-logo" src="assets/logo.png" alt="Unidad de Investigación en Obesidad · ICMNSZ / UNAM">
         </a>
       </div>
 
